@@ -1,9 +1,11 @@
 # Aberto para a empresa por padrão
 
-Desde 25/11/2026, **tudo o que a carga publica é aberto para a empresa por padrão**: a diretoria e cada área de dentro
-são pedidas ao admin já abertas (`subareas.md`, seção 3), e nenhum documento leva a marca "não abre" por rotina. A skill
+Desde 25/11/2026, **tudo o que a carga publica é aberto para a empresa por padrão**: a área de dentro criada na carga
+herda a abertura da área de cima, e a que nasce fechada (área de cima fechada ou sensível marcada pelo admin) vai no
+pedido ao admin para abrir, como a diretoria ainda fechada (`subareas.md`, seções 3 e 4); nenhum documento leva a marca
+"não abre" por rotina. A skill
 **não sugere** "abre para a empresa: não" documento a documento, nem pergunta isso na parada de publicar. Áreas
-sigilosas que já existem não mudam (quem decide é o dono do LivupOS).
+sigilosas que já existem não mudam (quem decide é o admin do LivupOS).
 
 O que segura o sensível não é a marca, é o **corte**: o que é de uma pessoa nunca entra, em área aberta ou fechada
 (`separar.md`, seção 5). O que é dado de negócio sensível sai do texto e fica onde já mora; o documento aponta.

@@ -11,7 +11,9 @@ que cada pergunta é feita, o que vai ficar publicado e o que fazer se travar.
   "publicar". Caminho de documento só no plano e no arquivo do pedido.
 - **Uma pergunta por mensagem, e o porquê antes dela.** "Por que pergunto: ..." numa frase. A exceção é a confirmação
   (o que o LivupOS já diz, para corrigir se estiver errado), que vem junto, sem ser pergunta.
-- **Nomes, não e-mails.** O e-mail só aparece no arquivo do pedido ao admin.
+- **Nomes, não e-mails.** O e-mail só vai nas chamadas que criam a área de dentro ou trocam quem responde e no
+  arquivo do pedido ao admin; na conversa, só na conferência, quando a busca achou mais de uma pessoa ou o diretor
+  pede.
 - Checagem que passou não aparece. Só fala quando algo falha, e aí diz o que a pessoa precisa fazer.
 - Nada de "incrível", "poderoso", "vamos lá".
 
@@ -22,7 +24,7 @@ fazer. Exemplo, ao abrir a etapa 3:
 
 ```
 ◇  Logística: <nome> responde, <nome> substitui
-◇  4 áreas de dentro, pedido ao admin entregue
+◇  4 áreas de dentro criadas, pedido ao admin entregue
 ◆  3 de 6 · O mínimo de Logística
 ○  Passar às áreas de dentro
 ○  Sistemas e indicadores (opcional)
@@ -67,11 +69,14 @@ sublinhado viram espaço, e cada palavra começa com maiúscula, menos de, da, d
 **Casos que mudam a mensagem** (cada um vira a pergunta da mensagem, e a da etapa 2 vem na mensagem seguinte):
 - **Quem não está mais ativo** (`ativo: false`): "O LivupOS ainda tem `<nome>` como quem `<responde pela área |
   substitui>`, mas essa pessoa não está mais ativa. Quem assume esse papel agora? Por que pergunto: sem alguém ativo nele, o que
-  for proposto para a área fica parado." A troca entra no pedido ao admin;
-  se é quem responde, o pedido sai com "quem responde não está mais ativo: decide o admin".
+  for proposto para a área fica parado." Se quem roda responde ou substitui pela área de cima, a troca é na etapa 2,
+  com a conferência e o ok (`subareas.md`, seção 3, item 6); senão (a diretoria, ou quem responde pela área de dentro
+  rodando a carga dela), entra no pedido ao admin ou numa mensagem pronta para quem responde pela área de cima. Se é quem
+  responde pela diretoria, o pedido sai com "quem responde não está mais ativo: decide o admin".
 - **Responsável herdado** (`herdado_de` preenchido; cada papel herda por conta própria; só numa área de dentro): diga
   por papel, sem pergunta: "`<área>` ainda não tem `<quem responda | quem substitua>` próprio; hoje é quem
-  `<responde | substitui>` por `<área de cima>`: `<nome ou você>`." Se o diretor quiser alguém próprio, vai no pedido.
+  `<responde | substitui>` por `<área de cima>`: `<nome ou você>`." Se quem roda decide a área de cima e quer alguém
+  próprio, a troca é na etapa 2, com a conferência e o ok (`subareas.md`, seção 3, item 6); senão, como no caso acima.
 - **A mesma pessoa nos dois papéis:** "Pelo LivupOS, você está nos dois papéis desta área. Quem pode te substituir na
   ausência? Por que pergunto: quem substitui aprova quando você não está, para nada ficar parado."
 - **Um papel nulo:** pergunte só esse papel, com o porquê.
@@ -122,8 +127,8 @@ Na sessão só de estratégia, na primeira mensagem depois de conferir a área:
 **A diferença com o que já se sabe** (`SKILL.md`, etapa 2, itens 1 e 2), uma pergunta só, com o porquê:
 
 > Você disse `<A, B, C>`. Na plataforma de apps, `<Área>` também tem `<D>` (`<descrição curta>`) e `<E>`. São áreas de
-> dentro hoje também? Por que pergunto: a plataforma de apps já se organiza assim, e o que não entrar agora não vai no
-> pedido ao admin.
+> dentro hoje também? Por que pergunto: a plataforma de apps já se organiza assim, e o que não entrar agora não vai ser
+> criado nesta conversa.
 
 Se a área já tem áreas de dentro no LivupOS, sem perguntar: "No LivupOS, `<Área>` já tem `<nome>` (responde `<nome>`,
 substitui `<nome>`); se algo aqui estiver errado, me diga." Área de dentro sigilosa que já existe: "só quem tem acesso
@@ -162,21 +167,21 @@ a ela lê; isso não muda com a carga". Nada a perguntar: vá direto à tabela.
 > ```
 >
 > Cada assunto vira uma pasta dentro de `<Área>`, e quem aprova o que entra em todas é `<você | quem responde>`. Não
-> há pedido ao admin`< (a abertura para a empresa já veio quando <Área> foi criada)>`. Está certo?
+> há área nova para criar`<; <Área> ainda não está aberta para a empresa, e isso vai num pedido ao admin>`. Está certo?
 
 **Nome que não fecha** (apelido, primeiro nome, mais de uma pessoa, ou uma pessoa só com cargo de outra área), uma
 pergunta:
 
 > Qual é o nome completo de `<apelido>`, que `<responde | substitui>` em `<área de dentro>`? (Vários nomes a
-> conferir vão juntos, numa pergunta só.) Por que pergunto: o pedido ao admin
-> precisa da pessoa certa, e `<"<apelido>">` `<trouxe mais de uma pessoa | trouxe alguém de outra área>`.
+> conferir vão juntos, numa pergunta só.) Por que pergunto: a área de dentro
+> vai ser criada com a pessoa certa, e `<"<apelido>">` `<trouxe mais de uma pessoa | trouxe alguém de outra área>`.
 
 **Substituto que ele não disse** (em branco sem "não sei"), uma pergunta antes da parada 2:
 
 > Ninguém substitui em `<áreas sem substituto>`? Por que pergunto: sem substituto, quando a pessoa sai de férias, o
 > que for proposto ali espera ela voltar. "Não sei" vale: fica em branco.
 
-**Parada 2** (a árvore, o efeito e o ok):
+**Parada 2** (a árvore e o "está certo?"; não é o ok de criar):
 
 > Ficou assim:
 >
@@ -187,30 +192,67 @@ pergunta:
 > └── assuntos de <Área> sem área própria: <frente>, <frente>
 > ```
 >
-> Cada uma é uma área de dentro de `<Área>`: quem responde por ela aprova o que entra ali, e você continua podendo
-> aprovar lá e responde pelo todo. Quando o admin criar, elas abrem para a empresa toda, como o resto do contexto da
-> Liv Up; dado de pessoa não entra em nenhuma delas. Desfazer é com o admin. As pessoas da árvore precisam estar de acordo: confirme com elas você mesmo.
+> As pessoas da árvore precisam estar de acordo: confirme com elas você mesmo.
 >
-> Está certo? É isto que vai no pedido ao admin.
+> A árvore está certa? Se sim, a gente confere as áreas de dentro novas uma por uma antes de eu criar qualquer coisa.
 
 Nunca "fora" de `<Área>`, nunca "fora da pasta". **Só se ele perguntar por que o endereço não é `<area>/<área de
 dentro>`**, uma linha: "Na hierarquia ela é de `<Área>`; o endereço dos documentos é solto (com `<area>` na frente do
 nome) para que, se um dia ela mudar de diretoria, nenhum link quebre."
 
-**Entrega do pedido** (com o sim, na mesma mensagem que abre a etapa 3). Os admins são os de `minhas_permissoes`,
-sem quem roda:
+**Criar** (só as áreas de dentro novas, cada uma com quem responde; `subareas.md`, seção 3). Se quem roda é quem
+substitui, antes da primeira conferência, uma pergunta:
 
-> Montei o pedido ao admin do LivupOS: `areas-de-dentro-<area>-AAAA-MM-DD.md`. Ele pede para criar e abrir para a
-> empresa cada área de dentro`<, e abrir <Área>, se ainda não estiver aberta>`. Mande a `<nomes dos admins, sem
-> você>`. Enquanto o admin cria, a gente segue com o mínimo de `<Área>`, que não depende disso. `<Sem pasta: "Baixe
-> também o plano, carga-<area>-AAAA-MM-DD.md: é onde eu guardo onde paramos; o que vale é o último que você baixou.">`
+> `<Nome de quem responde>` já concordou com esta divisão? Por que pergunto: criar as áreas de dentro é decisão de quem
+> responde por `<Área>`; você pode criar, mas com o acordo dele.
 
-(O efeito do pedido já foi dito na parada 2; não se repete aqui.)
+Sem o acordo ("não", "ainda não", "não sei"): não cria; vá à entrega, com o texto para quem substitui.
 
-Se quem roda é quem substitui, no lugar da frase "Mande a ...":
+Depois, a conferência, **uma mensagem por área**:
+
+> **`<Nome da área de dentro>`** (`<n>` de `<N>`)
+> - Nome: `<nome>`
+> - Endereço: `<id>`
+> - Quem responde: `<nome completo>` (`<cargo>`)
+> - Quem substitui: `<nome completo | em branco>`
+>
+> Está certo? Por que pergunto: é exatamente isto que vai ser criado no LivupOS, e é com essas pessoas que o contexto
+> de `<nome>` vai ser aprovado.
+
+Depois da última conferência, **o efeito e o ok**, numa mensagem (o texto de `subareas.md`, seção 2, "Efeito, para
+dizer antes de criar"), que termina em "Posso criar as `<N>` áreas de dentro agora?". Só um sim claro cria. Antes da
+primeira chamada, uma linha: "Criando as `<N>` áreas de dentro."
+
+**O resultado** (uma mensagem, depois da última chamada):
+
+> Pronto. Ficou assim no LivupOS:
+>
+> ```
+> <Área>
+> ├── <área de dentro>        responde: <nome> · substitui: <nome | em branco>     criada<, fechada para a empresa>
+> └── <área de dentro>        não criada: <o motivo em linguagem simples>
+> ```
+>
+> `<Se alguém ainda não entrou no LivupOS: "<Nome> ainda não entrou no LivupOS: o papel vale no primeiro login.">`
+> `<Se alguma ficou fechada ou não foi criada: "O que falta (abrir para a empresa<, criar <nomes>>) vai num pedido ao
+> admin, logo abaixo.">`
+
+**Entrega do pedido** (só se sobrou algo para o admin, `subareas.md`, seção 4; com o resultado, na mesma mensagem que
+abre a etapa 3). Os admins são os de `minhas_permissoes`, sem quem roda:
+
+> Montei o pedido ao admin do LivupOS com o que eu não faço daqui: `areas-de-dentro-<area>-AAAA-MM-DD.md`. Ele pede
+> `<abrir para a empresa <áreas> | criar e abrir <áreas> | abrir <Área> | trocar quem responde por <Área>>`. Mande a
+> `<nomes dos admins, sem você>`. Enquanto isso, a gente segue com o mínimo de `<Área>`, que não depende disso.
+> `<Sem pasta: "Baixe também o plano, carga-<area>-AAAA-MM-DD.md: é onde eu guardo onde paramos; o que vale é o último
+> que você baixou.">`
+
+Sem nada para o admin: "Nada disso depende do admin." e siga para a etapa 3.
+
+Se quem roda é quem substitui e não houve o acordo, no lugar da frase "Mande a ..." (com o acordo, vale o texto de
+cima):
 
 > Criar área de dentro é decisão de `<nome de quem responde>`, que responde por `<Área>`: mande o arquivo para ele
-> primeiro. Com o ok dele, ele (ou você) manda a `<nomes dos admins, sem você>`.
+> primeiro. Com o ok dele, ele pode rodar a carga e criar, ou mandar o arquivo a `<nomes dos admins, sem você>`.
 
 ## Etapa 3 de 6: o mínimo de `<Área>`
 
@@ -312,12 +354,12 @@ plano). Se a pessoa é quem substitui: "`<Nome>` substitui você por `<Área>` e
 ## Etapa 4 de 6: passar às áreas de dentro
 
 > **4 de 6 · Passar às áreas de dentro.** Agora cada área de dentro monta o mínimo dela, com quem responde por ela.
-> `<Se alguma já existe:>` Conferi no LivupOS: o admin já criou `<áreas>`. Abaixo, uma mensagem pronta para cada
-> pessoa. Eu não mando nada: copie e mande você.
+> `<Se alguma já existe:>` Conferi no LivupOS: `<áreas>` já `<existe | existem>`. Abaixo, uma mensagem pronta para
+> cada pessoa. Eu não mando nada: copie e mande você.
 
 Se alguma ainda não existe no LivupOS (uma linha, na mesma mensagem ou sozinha, se nenhuma existe):
 
-> `<Áreas>` ainda não `<foi criada | foram criadas>` pelo admin, então a mensagem ainda não serve (a pessoa abriria a
+> `<Áreas>` ainda não `<foi criada | foram criadas>` (estão no pedido ao admin), então a mensagem ainda não serve (a pessoa abriria a
 > carga e não acharia a área). Assim que o admin avisar que criou, abra uma conversa, chame a carga e escreva
 > "mensagens das áreas de dentro": eu confiro e entrego as que faltam.
 
@@ -347,8 +389,8 @@ com todos os diretores). Se a instalação falhar para a
 pessoa, ela fala com os admins do LivupOS (`<nomes dos admins, sem você>`).
 
 A mesma pessoa em mais de uma área de dentro: uma mensagem só, com as áreas juntas. Área de dentro sem quem responde,
-numa linha: "`<Área de dentro>` fica com você até alguém assumir; quando souber quem, me diga, que eu preparo o pedido
-de troca e a mensagem."
+numa linha: "`<Área de dentro>` fica com você até alguém assumir; quando souber quem, me diga, que eu confiro com você,
+troco quem responde (com o seu ok) e preparo a mensagem."
 
 ## Etapa 5 de 6: sistemas e indicadores (opcional)
 
@@ -523,7 +565,8 @@ Checklist (a skill confere sozinha e mostra só o que falhou):
 - [ ] Se houve sistemas: nenhum sistema de tech descrito (só link); cada sistema da área que entrou tem documento na
       lista `sistemas/`, sem dado, credencial nem estrutura de tabela. Pular não é falha.
 - [ ] Se houve indicadores: cada indicador tem a definição e de onde vem o número; nenhum traz meta nem fórmula.
-- [ ] O pedido ao admin, se houver, está entregue; as mensagens às áreas de dentro, se o mínimo saiu, também.
+- [ ] As áreas de dentro conferidas e com ok foram criadas (ou estão no pedido ao admin, com o motivo); o pedido ao
+      admin, se houver, está entregue; as mensagens às áreas de dentro, se o mínimo saiu, também.
 
 Falhou um item: diga o que falta, registre no plano e combine quando fecha.
 
@@ -537,8 +580,8 @@ Termine com duas mensagens, uma pergunta em cada:
 Depois, as sugestões que valem (cada uma numa linha, e a pessoa decide):
 
 > - O pedido ao admin ainda não foi mandado: `areas-de-dentro-<area>-AAAA-MM-DD.md`, para `<nomes dos admins, sem
->   você>` (ou, se você substitui, para `<quem responde>` primeiro).
-> - As mensagens às áreas de dentro vão depois que o admin criar as áreas.
+>   você>` (ou, se você substitui e `<quem responde>` ainda não concordou, para ele primeiro).
+> - As mensagens às áreas que ainda estão no pedido ao admin vão depois que ele criar.
 > - O app `<nome>` mostra o mesmo texto que agora está publicado. O ideal é ele passar a ler do LivupOS a parte
 >   oficial, e manter com ele o que é trabalho do time.
 > - `<N>` termos são de sistema ou métricas que ainda não estão na ontologia nem no catálogo de Dados. Deixei a lista

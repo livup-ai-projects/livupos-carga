@@ -62,6 +62,9 @@ SENTIDOS = {"no minimo", "no maximo"}
 PERIODOS = {"mensal", "trimestral", "semestral", "anual"}
 PRAZO = re.compile(r"^\d{4}(-(0[1-9]|1[0-2])(-\d{2})?|-[TtQq][1-4]|-[Ss][12])?$")  # mês, trimestre, semestre, ano, data
 PROPRIO = "proprio-da-area"  # projeto só da área, sem objetivo da empresa, por decisão (não é falta)
+# D160 (OKR): objetivo → resultado-chave (a meta) ← projeto; projeto-chave é a marca `chave: true` no projeto.
+LIMITE_PROJETOS_CHAVE = 5  # o padrão; a estratégia do ano da área pode declarar outro em `limite_projetos_chave`
+LIMITE_RESULTADOS_POR_OBJETIVO = 5  # o método pede de 3 a 5 resultados-chave por objetivo
 
 
 def norm(txt):
@@ -384,11 +387,40 @@ def main():
             if obrigatorio:
                 falta(caminho, f"{prefixo}falta dizer a que objetivo da empresa serve" + (", ou se é só da área" if not prefixo else ""), quem)
         elif not isinstance(obj, str):
-            falta(caminho, f"{prefixo}`objetivo` tem de ser UM objetivo (está: {obj})", quem)
+            dica = "" if prefixo else "; para mais de um, use `objetivos: [...]`"
+            falta(caminho, f"{prefixo}`objetivo` tem de ser UM objetivo (está: {obj}){dica}", quem)
         elif norm(obj) == norm(PROPRIO):
             falta(caminho, f"{prefixo}`{PROPRIO}` vale só em projeto; uma meta serve a um objetivo da empresa", quem)
         elif objetivos and obj not in objetivos and obj not in da_area:
             falta(caminho, f"{prefixo}o objetivo `{obj}` não está entre os objetivos da empresa nem os da área", quem)
+
+    todas_metas = {}  # id -> (caminho, meta): as metas da empresa e das diretorias desta pasta (D160)
+
+    def conferir_aspiracao(caminho, meta, tipo, pre, quem):
+        """D160: a aspiração (o alvo além do comprometido) existe no chegar_a e no manter, e não fica aquém dele."""
+        asp = meta.get("aspiracao")
+        if sem_valor(asp):
+            return
+        if tipo == "entrega":
+            falta(caminho, f"{pre}a entrega é sim ou não na data: não tem aspiração (tire a `aspiracao`)", QUEM_MONTOU)
+            return
+        relativo = lambda v: str(v).strip().startswith(("+", "-"))
+        if tipo == "chegar a" and relativo(asp) and relativo(meta.get("para")):
+            # As duas relativas ao mesmo `de` ("+20%" e "+10%"): compara as variações, no sentido do para.
+            p_, a = valor(meta.get("para")), valor(asp)
+            if p_ and a and p_[1] == a[1] and p_[0] != 0 and ((a[0] < p_[0]) if p_[0] > 0 else (a[0] > p_[0])):
+                falta(caminho, f"{pre}a aspiração ({asp}) fica aquém do valor de chegada ({meta.get('para')}): a aspiração vai além do comprometido", quem)
+            return
+        a = None if relativo(asp) else valor(asp)
+        if tipo == "chegar a":
+            d, p_ = valor(meta.get("de")), None if relativo(meta.get("para")) else valor(meta.get("para"))
+            if a and d and p_ and d[1] == p_[1] == a[1] and p_[0] != d[0]:
+                if (a[0] < p_[0]) if p_[0] > d[0] else (a[0] > p_[0]):
+                    falta(caminho, f"{pre}a aspiração ({asp}) fica aquém do valor de chegada ({meta.get('para')}): a aspiração vai além do comprometido", quem)
+        elif tipo == "manter":
+            lim, sentido = valor(meta.get("limite")), norm(meta.get("sentido") or "")
+            if a and lim and a[1] == lim[1] and ((sentido == "no maximo" and a[0] > lim[0]) or (sentido == "no minimo" and a[0] < lim[0])):
+                falta(caminho, f"{pre}a aspiração ({asp}) fica aquém do limite ({meta.get('limite')}): a aspiração é um nível melhor que o comprometido", quem)
 
     def conferir_meta(caminho, meta, quem, da_empresa):
         mid = meta.get("id")
@@ -396,6 +428,9 @@ def main():
             falta(caminho, "meta sem id", quem)
             return
         pre = f"meta `{mid}`: "
+        if mid in todas_metas:
+            falta(caminho, f"{pre}o id também está em `{todas_metas[mid][0]}`: cada meta tem um id só (ponha a área no id)", QUEM_MONTOU)
+        todas_metas[mid] = (caminho, meta)
         if da_empresa and sem_valor(meta.get("indicador")):
             # Enquanto `liv-up/indicadores` não tem os indicadores da empresa, a meta somada ou por média fica "a
             # confirmar": uma pergunta só a quem decide `liv-up`, não uma linha por meta (juntada depois do laço).
@@ -425,13 +460,14 @@ def main():
                 falta(caminho, f"{pre}meta de entrega sem o critério de pronto", quem)
             if sem_valor(meta.get("prazo")):
                 falta(caminho, f"{pre}falta o prazo", quem)
+        conferir_aspiracao(caminho, meta, tipo, pre, quem)
         if meta.get("parciais") and tipo != "chegar a":
             falta(caminho, f"{pre}parciais só valem em meta de chegar a um número", QUEM_MONTOU)
         for campo in ("prazo", "de_em"):
             v = meta.get(campo)
             if not sem_valor(v) and not PRAZO.match(str(v).strip()):
                 falta(caminho, f"{pre}o `{campo}` ({v}) não é mês, trimestre, semestre nem ano (2027-03, 2027-T1, 2027-S1, 2027)", QUEM_MONTOU)
-        for campo in ("de", "para", "limite"):
+        for campo in ("de", "para", "limite", "aspiracao"):
             if sem_aspas(meta.get(campo)):
                 falta(caminho, f"{pre}o `{campo}` está sem aspas (o YAML leu {br(meta.get(campo), 6)}): escreva o número como no material, entre aspas (\"1.750\"); sem aspas, o YAML pode ler outro número (1.750 vira 1,75)", QUEM_MONTOU)
         if da_empresa:
@@ -510,9 +546,12 @@ def main():
                         falta(caminho, f"objetivo `{oid}`: o pilar `{pilar}` não está entre os objetivos da Liv Up", quem)
 
     compoe = defaultdict(list)
+    limite_chave = {}  # D160: a área (a própria, não a diretoria-pai) -> (caminho, `limite_projetos_chave`)
     for caminho in diretorias:
         cab, corpo = validos[caminho]
         quem = f"diretor(a) de {caminho.split('/')[0]}"
+        if "limite_projetos_chave" in cab:
+            limite_chave[caminho.split("/")[0]] = (caminho, cab.get("limite_projetos_chave"))
         metas = lista_de_campos(cab, "metas", falta, caminho, quem)
         for meta in metas:
             conferir_meta(caminho, meta, quem, False)
@@ -639,6 +678,7 @@ def main():
             por_codigo[cod].append(caminho)
 
     lista = "responsável pela lista de códigos"
+    chaves = defaultdict(list)  # D160: a diretoria -> [(projeto-chave, metas que move, indicadores da contribuição)]
     areas_conhecidas = {c.split("/")[0] for c in docs} | {c.split("/")[0] for c in existentes} | sem_leitura | {"liv-up"}
     for caminho in projetos:
         cab, corpo = validos[caminho]
@@ -671,9 +711,29 @@ def main():
             falta(caminho, "projeto sem dono", diretor)
         elif not um_dono:
             falta(caminho, f"o dono precisa ser UMA pessoa, pelo e-mail (está: {dono})", diretor)
+        # D160: `objetivo` e `objetivos` (o projeto que serve a mais de um) se somam, como no painel.
         obj = cab.get("objetivo")
-        if not (isinstance(obj, str) and norm(obj) == norm(PROPRIO)):
-            conferir_objetivo(caminho, obj, "", quem, True)
+        objs = cab.get("objetivos")
+        if sem_valor(objs):
+            objs = []
+        elif not isinstance(objs, list):
+            falta(caminho, f"`objetivos` é uma lista ([a, b]); está: {objs}", QUEM_MONTOU)
+            objs = []
+        if objs and any(not isinstance(o, str) for o in objs):
+            falta(caminho, f"`objetivos` leva só os ids dos objetivos ([a, b]); está: {objs}", QUEM_MONTOU)
+        acusado = obj is not None and not isinstance(obj, str)
+        if acusado:
+            conferir_objetivo(caminho, obj, "", quem, True)  # "tem de ser UM objetivo", com a dica do `objetivos`
+            obj = None
+        com_valor = [o for o in [obj, *objs] if isinstance(o, str) and not sem_valor(o)]
+        proprios = [o for o in com_valor if norm(o) == norm(PROPRIO)]
+        reais = [o for o in com_valor if norm(o) != norm(PROPRIO)]
+        if not com_valor and not acusado:
+            conferir_objetivo(caminho, None, "", quem, True)
+        if proprios and reais:
+            falta(caminho, f"`{PROPRIO}` junto de outros objetivos ({', '.join(reais)}): o projeto serve a objetivos ou é só da área", quem)
+        for o in reais:
+            conferir_objetivo(caminho, o, "", quem, False)
         partes_cam = caminho.split("/")
         if re.match(r"^[a-z0-9-]+/projetos/[^/]+/visao-geral$", caminho):
             if not (area in pai or area in {c.split("/")[0] for c in diretorias} or area in {c.split("/")[0] for c in existentes}
@@ -684,8 +744,40 @@ def main():
         elif "projetos" not in partes_cam:
             falta(caminho, f"documento com a tag `projeto` fora de `projetos/`: o projeto mora em `{area}/projetos/<projeto>/visao-geral`", QUEM_MONTOU)
         contrib = lista_de_campos(cab, "contribuicao", falta, caminho, quem)
-        if not contrib:
-            falta(caminho, "falta como saber se funcionou (indicador, efeito e até quando)", quem)
+        # D160: a meta (o resultado-chave) que o projeto move, pelo id.
+        mp = cab.get("meta")
+        bruto_meta = [mp] if isinstance(mp, str) else mp if isinstance(mp, list) else ([] if mp is None else [mp])
+        if any(not isinstance(m, str) for m in bruto_meta):
+            falta(caminho, f"`meta` leva o id da meta (ou uma lista de ids), como texto; está: {mp}", QUEM_MONTOU)
+        ids_meta = [m for m in bruto_meta if isinstance(m, str) and not sem_valor(m)]
+        com_estrategia = {dona(c.split("/")[0]) for c in diretorias}
+        for mid in ids_meta:
+            if mid not in todas_metas and dona(area) in com_estrategia:
+                falta(caminho, f"a meta `{mid}` não está na estratégia de {dona(area)} nem nas outras desta pasta", quem)
+        if not contrib and not ids_meta:
+            falta(caminho, "falta como saber se funcionou: a meta que o projeto move (`meta`) ou a contribuição (indicador, efeito e até quando)", quem)
+        ch = cab.get("chave")
+        if ch is not None and not isinstance(ch, bool):
+            falta(caminho, f"`chave` é true ou false (está: {ch})", QUEM_MONTOU)
+        elif ch is True:
+            chaves[area].append((caminho, set(ids_meta), {c.get("indicador") for c in contrib if isinstance(c.get("indicador"), str)}))
+        pai_ = cab.get("pai")
+        por_cod = {v: k for k, v in id_do_projeto.items() if v}
+        if sem_valor(pai_):
+            pass
+        elif not isinstance(pai_, str):
+            falta(caminho, f"`pai` é o caminho da visão geral de um projeto, como texto; está: {pai_}", QUEM_MONTOU)
+        elif pai_.strip().endswith(".md") or pai_.strip().startswith("/") or pai_.strip().endswith("/"):
+            falta(caminho, f"`pai` ({pai_}): escreva o caminho sem `.md` e sem barra no começo ou no fim (`<area>/projetos/<projeto>/visao-geral`)", QUEM_MONTOU)
+        else:
+            alvo_pai = por_cod.get(pai_.strip(), limpo(pai_).removesuffix("/visao-geral"))
+            if alvo_pai == caminho.removesuffix("/visao-geral"):
+                falta(caminho, "o projeto é pai de si mesmo", QUEM_MONTOU)
+            elif alvo_pai + "/visao-geral" in validos:
+                if not sem_valor(validos[alvo_pai + "/visao-geral"][0].get("pai")):
+                    falta(caminho, f"o pai `{alvo_pai}` também tem pai: o subprojeto tem um nível só", quem)
+            elif not (existe(alvo_pai + "/visao-geral") or existe(alvo_pai) or nao_vejo(alvo_pai)):
+                falta(caminho, f"o pai `{alvo_pai}` não está publicado nem nos rascunhos", quem)
         for c in contrib:
             ind = c.get("indicador")
             conferir_indicador(caminho, ind, "", quem)
@@ -746,8 +838,38 @@ def main():
         if datas:
             falta(caminho, f"datas no texto ({', '.join(datas[:4])}): marco e data vão para o acompanhamento, não para o documento", QUEM_MONTOU)
 
+    # D160: projetos-chave demais; meta que nenhum projeto-chave move (só onde a diretoria marcou algum); objetivo
+    # com mais de 5 resultados-chave. Informativos, como no painel: o diretor decide.
+    for area, lst in sorted(chaves.items()):
+        limite = LIMITE_PROJETOS_CHAVE
+        if area in limite_chave:
+            c_lim, v = limite_chave[area]
+            if isinstance(v, int) and not isinstance(v, bool) and v > 0:
+                limite = v
+            else:
+                falta(c_lim, f"`limite_projetos_chave` ({v}) não é um número inteiro positivo: vale o padrão, {LIMITE_PROJETOS_CHAVE}", QUEM_MONTOU)
+        if len(lst) > limite:
+            falta(f"{area}/projetos", f"{len(lst)} projetos-chave em {area} (o limite é {limite}): escolha os que ficam com a marca (informativo)", f"diretor(a) de {dona(area)}")
+    todos_chave = [x for lst in chaves.values() for x in lst]
+    for mid, (c_meta, meta) in todas_metas.items():
+        area = c_meta.split("/")[0]
+        if area == "liv-up" or area not in chaves:  # só onde a própria área marcou algum projeto-chave
+            continue
+        ind = meta.get("indicador") if isinstance(meta.get("indicador"), str) else None
+        if not any(mid in ids or (ind and ind in inds) for _, ids, inds in todos_chave):
+            falta(c_meta, f"meta `{mid}`: nenhum projeto-chave a move (informativo)", f"diretor(a) de {dona(area)}")
+    por_objetivo = defaultdict(list)
+    for mid, (c_meta, meta) in todas_metas.items():
+        if isinstance(meta.get("objetivo"), str) and not sem_valor(meta.get("objetivo")):
+            por_objetivo[(c_meta, meta["objetivo"])].append(mid)
+    for (c_meta, oid), mids in sorted(por_objetivo.items()):
+        if len(mids) > LIMITE_RESULTADOS_POR_OBJETIVO:
+            falta(c_meta, f"objetivo `{oid}` com {len(mids)} metas (o método pede de 3 a 5): {', '.join(mids)} (informativo)", f"diretor(a) de {dona(c_meta.split('/')[0])}" if not c_meta.startswith("liv-up/") else "diretoria executiva")
+
     if empresa:
         usados = {validos[c][0].get("objetivo") for c in projetos if isinstance(validos[c][0].get("objetivo"), str)}
+        usados |= {o for c in projetos if isinstance(validos[c][0].get("objetivos"), list)
+                   for o in validos[c][0]["objetivos"] if isinstance(o, str)}
         usados.discard(PROPRIO)
         usados |= {m.get("objetivo") for _, m in metas_empresa.values() if isinstance(m.get("objetivo"), str)}
         for oid in objetivos:

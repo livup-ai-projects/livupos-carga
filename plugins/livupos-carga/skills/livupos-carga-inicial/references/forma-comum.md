@@ -44,7 +44,7 @@ Regras para usar:
 4. **Forma que a skill não conhece:** `versao_atual` maior que 3, ou `pastas_abertas_para_a_empresa` diferente de
    `["estrategia", "projetos"]`. Uma forma nova pode pedir documento básico sem molde aqui, ou abrir para a empresa
    uma pasta que a skill não avisaria.
-   - Na carga: faça a etapa 1 e a 2 (a estrutura e o pedido ao admin não dependem da forma dos documentos) e monte o
+   - Na carga: faça a etapa 1 e a 2 (criar as áreas de dentro e o pedido ao admin não dependem da forma dos documentos) e monte o
      mínimo como rascunho, sem publicar. Diga o texto de `references/conducao.md`, "Forma desconhecida", na parada 1 e
      de novo antes de mostrar o rascunho.
    - Na sessão só de estratégia: confira e mostre o que falta (etapa de estratégia, até antes da parada 7), sem
@@ -54,8 +54,8 @@ Regras para usar:
 5. **Sem o campo no schema** (conector antigo): use este arquivo e siga, sem travar. Diga na parada 1 como reconectar
    (`conducao.md`, etapa 1). **Com o campo, mas a chamada falhou** ou voltou sem `estrutura`: tente uma vez de novo; se
    não vier, use este arquivo e siga, sem falar em conector antigo.
-6. **`versao_atual: 2` (a v3 ainda não está no ar; decisão de 25/11: esperar a v3).** Faça a etapa 1 e a 2 (a
-   estrutura e o pedido ao admin não dependem da versão) e monte o mínimo como rascunho, **sem publicar**. Diga o texto
+6. **`versao_atual: 2` (a v3 ainda não está no ar; decisão de 25/11: esperar a v3).** Faça a etapa 1 e a 2 (criar as
+   áreas de dentro e o pedido ao admin não dependem da versão) e monte o mínimo como rascunho, **sem publicar**. Diga o texto
    de `references/conducao.md`, "A forma nova ainda não entrou", antes de mostrar o rascunho. Registre no plano "mínimo
    pronto, espera a v3" e entregue o rascunho no plano, para publicar na retomada. As mensagens às áreas de dentro
    esperam a publicação, como sempre. Não há fechamento com registro de resultado.
@@ -86,7 +86,8 @@ o da diretoria na frente (`logistica-last-mile/...`), com a mesma forma (seção
 `agentes/` nem `notas/` (são da plataforma).
 
 **O mínimo** (`minimo_d0` da definição) é o que toda área publica antes de qualquer outra coisa: a visão geral, as
-áreas de dentro (criadas pelo admin, com quem responde por cada uma, e listadas na visão geral) e o
+áreas de dentro (criadas na carga com o ok de quem responde, ou pelo admin, com quem responde por cada uma, e listadas
+na visão geral) e o
 glossário geral, em `<area>/glossario`. Pasta vazia não existe: `geral/`, listas, `indicadores/`, `estrategia/` e `projetos/` só nascem
 quando têm o primeiro documento.
 
@@ -230,7 +231,7 @@ assim:
 
 A área de dentro tem a mesma forma: visão geral com `estrutura: 3`, `glossario` e `indicadores/` próprios na raiz
 dela, frentes, `geral/` e listas. **O caminho começa pelo id dela**, que leva o da diretoria na frente (`logistica-last-mile/visao-geral`,
-`people-dp/glossario`; `subareas.md`, seção 3). Na hierarquia ela é da diretoria. Dos termos da diretoria, só os que a área de dentro
+`people-dp/glossario`; `subareas.md`, seção 4, "O id"). Na hierarquia ela é da diretoria. Dos termos da diretoria, só os que a área de dentro
 usa vão em "Termos de outras áreas" do glossário dela, cada um com uma linha e o link para o glossário da diretoria
 (uma cópia só: a definição mora lá). A carga da área de dentro é feita por quem responde por ela,
 com esta mesma skill, depois que a diretoria publicou o mínimo dela. Na etapa 2 dela, a pergunta é a mesma: um pedaço

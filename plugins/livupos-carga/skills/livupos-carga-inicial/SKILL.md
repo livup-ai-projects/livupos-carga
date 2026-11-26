@@ -2,16 +2,16 @@
 name: livupos-carga-inicial
 description: |
   Guia o diretor (ou quem responde por uma área da Liv Up, ou o substituto) a montar o contexto da área no LivupOS:
-  primeiro a estrutura (a área, quem responde e quem substitui, as áreas de dentro e quem responde por cada uma, com o
-  pedido ao admin para criar e abrir), depois o mínimo (visão geral e glossário), publicado só com o ok dele, e então
+  primeiro a estrutura (a área, quem responde e quem substitui, as áreas de dentro e quem responde por cada uma,
+  criadas com o ok dele; abrir fica num pedido ao admin), depois o mínimo (visão geral e glossário), publicado só com o ok dele, e então
   uma mensagem pronta para cada responsável rodar a carga da área de dentro. Sistemas, indicadores e os documentos do
   dia a dia vêm depois, opcionais. Tudo abre para a empresa; dado de pessoa nunca entra. Também monta e confere a
   estratégia do ano depois do retreat. Use para "quero subir o contexto da minha área", "carga inicial do LivupOS",
   "montar a estrutura da minha diretoria no LivupOS", "mensagens das áreas de dentro", "conferir a estratégia da minha diretoria",
   ou para retomar. Não use para
-  correção pontual (`livupos-contribuir`), para aprovar propostas (`livupos-curadoria`) nem para criar área (admin).
+  correção pontual (`livupos-contribuir`), para aprovar propostas (`livupos-curadoria`) nem para criar diretoria (admin).
 metadata:
-  versao: "2026-11-25.2"
+  versao: "2026-11-26.1"
   estrutura: "3"
   molde: "brain-livup (condução), roteiro de 25/11/2026 (estrutura primeiro e o mínimo) e estrutura v3 (lugar)"
 ---
@@ -69,10 +69,16 @@ da Liv Up; nada nela depende de qual área é. Os exemplos das referências vêm
 a testar); use-os como forma, não como conteúdo nem como lista do que a sua área deve ter.
 
 1. **Só quem responde e quem substitui.** Quem não publica direto na área não roda a carga, e publicar direto só por
-   ser admin do LivupOS não basta. A skill não cria área, não troca quem responde, não concede acesso, não abre área.
-   Não chame, mesmo se a pessoa for admin e pedir, `contexto_liv_up_criar_area`, `definir_dono`, `acesso`,
-   `abrir_para_a_empresa`, `compartilhar` nem `marcar_fora_da_empresa`: o caminho é o pedido ao admin em arquivo. Para
-   acesso, diga que isso fica fora da carga (numa conversa à parte, com a skill de curadoria, ou com o admin) e siga.
+   ser admin do LivupOS não basta. A skill não concede acesso e não abre área. **A única exceção é a etapa 2:** criar
+   as áreas de dentro desta área (`contexto_liv_up_criar_area`, com `pai` igual a esta área ou a uma área de dentro
+   dela) e trocar quem responde por uma área cuja área de cima quem roda responde ou substitui
+   (`contexto_liv_up_definir_dono`), só depois da conferência uma por uma e do ok explícito
+   (`references/subareas.md`, seção 3). Nunca área na raiz, nunca `sigilosa`, nunca abaixo de uma área que a pessoa
+   não responde nem substitui, mesmo se ela for admin e pedir. A troca de quem responde pela área em que quem roda é
+   o próprio responsável ou substituto (sem decidir a área de cima) não se faz daqui: vai ao pedido ao admin, ou numa
+   mensagem pronta para quem responde pela área de cima. Não chame `acesso`, `abrir_para_a_empresa`, `compartilhar`,
+   `marcar_fora_da_empresa`, `arquivar_area` nem `mover`: o caminho é o pedido ao admin em arquivo. Para acesso, diga que isso fica fora da carga (numa conversa à parte, com a skill de curadoria, ou com o
+   admin) e siga.
 2. **A skill só fala com quem está rodando.** Nunca manda DM, post, e-mail, convite ou comentário; nunca chama
    ferramenta de envio (Slack, Gmail, Calendar, Notion comment). Mensagens e perguntas a outras pessoas saem prontas
    para copiar. Ler o Slack para achar o e-mail de alguém pelo nome é leitura e pode.
@@ -94,8 +100,8 @@ a testar); use-os como forma, não como conteúdo nem como lista do que a sua á
 9. **O indicador aponta, não copia, e a meta só entra na estratégia.** O documento do indicador traz a definição em uma
    ou duas linhas e de onde vem o número (`references/moldes.md`, Indicador); a conta mora no catálogo de Dados; a meta
    mora na estratégia do ano, depois do retreat.
-10. **Antes de toda ação com efeito, diga o efeito em linguagem simples e espere o ok.** Publicar, entregar o pedido ao
-    admin, depositar nota, registrar o resultado: diga o que acontece, quem passa a ver, quem passa a decidir e como se
+10. **Antes de toda ação com efeito, diga o efeito em linguagem simples e espere o ok.** Criar área de dentro, trocar
+    quem responde por ela, publicar, entregar o pedido ao admin, depositar nota, registrar o resultado: diga o que acontece, quem passa a ver, quem passa a decidir e como se
     desfaz. Os textos estão em `references/conducao.md` e `references/subareas.md`. Se a pessoa responder sem ter
     entendido o efeito, explique de novo antes de agir.
 11. **A área nasce na estrutura 3** (`references/forma-comum.md`): `estrutura: 3` na visão geral (número inteiro, sem
@@ -108,15 +114,19 @@ a testar); use-os como forma, não como conteúdo nem como lista do que a sua á
 13. **Tudo abre para a empresa por padrão** (`references/fora-da-empresa.md`). A skill não sugere "não abre" como
     rotina; o que protege o sensível é o corte da regra 8.
 14. **Com o diretor, sem jargão e com nomes:** nada de "subárea", "owner", "frontmatter", "proposta", número de
-    decisão, caminho ou id na conversa (o id aparece só como "endereço", na árvore da parada 2).
-    Pessoas aparecem pelo nome, nunca pelo e-mail; o e-mail só vai no arquivo do pedido ao admin.
+    decisão, caminho ou id na conversa (o id aparece só como "endereço": na árvore da parada 2, na conferência de cada
+    área de dentro e na recusa de endereço).
+    Pessoas aparecem pelo nome, nunca pelo e-mail; o e-mail só vai nas chamadas que criam a área de dentro ou trocam
+    quem responde e no arquivo do pedido ao admin. Única exceção na conversa: na conferência, quando a busca achou mais
+    de uma pessoa ou o diretor pede, o e-mail daquela pessoa.
 
 ## Arquivos desta skill
 
 - `references/conducao.md`: o que a pessoa lê em cada etapa, a trilha, o tom e o que dizer quando trava.
 - `references/forma-comum.md`: a estrutura 3: a árvore, o mínimo, frente × área de dentro, `geral/` e listas, as
   pastas reservadas, área na forma anterior, área de dentro.
-- `references/subareas.md`: as áreas de dentro: quando, o porquê de cada pergunta, o id único e o pedido ao admin.
+- `references/subareas.md`: as áreas de dentro: quando, o porquê de cada pergunta, o id único, criar com o diretor
+  (conferência, efeito, ok, recusas) e o pedido ao admin do que sobra.
 - `references/fontes.md`: como puxar de cada lugar (Livup Brain e notas do diretor, apps, Drive, Notion, LivupOS).
 - `references/separar.md`: como classificar o material, cortar o sensível, trocar nome por papel.
 - `references/tipos-de-contexto.md`: os tipos de material, a área com pouco escrito e a área sensível.
@@ -155,8 +165,8 @@ a testar); use-os como forma, não como conteúdo nem como lista do que a sua á
    guardou. Se existir, leia, mostre em que etapa parou e siga dali. Sem o plano, use o que já está publicado
    (`itens`) para não refazer nada: o mínimo está feito quando há glossário e a visão geral já lista as áreas de
    dentro; senão, a visão geral que existe é **alterada** no mínimo, não criada de novo.
-   Plano com "mínimo pronto, espera a v3" e a plataforma já na versão 3: confira a área e as áreas de dentro (o admin
-   pode ter criado), atualize na visão geral quem responde por cada uma e vá direto à parada 3 com o rascunho.
+   Plano com "mínimo pronto, espera a v3" e a plataforma já na versão 3: confira a área e as áreas de dentro (podem
+   ter sido criadas na carga ou pelo admin), atualize na visão geral quem responde por cada uma e vá direto à parada 3 com o rascunho.
 5. `contexto_liv_up_pendencias`: se há proposta aberta do time central em `estrategia/` ou `projetos/` da área, anote
    para o fechamento.
 
@@ -187,8 +197,9 @@ quem decide ou quem lê". A skill não supõe área de dentro por causa do assun
    mundo", é frente; na dúvida, pergunte numa linha.
 3. **Quem responde e quem substitui em cada uma:** uma pergunta só, com a tabela já preenchida com o que se sabe (o
    gestor da plataforma, quem o LivupOS já tem, o nome que o diretor deu) e o porquê dos dois papéis
-   (`conducao.md`, etapa 2). "Não sei" é aceito: substituto em branco; sem quem responde, a área de dentro fica com o
-   diretor até alguém assumir. A mesma pessoa pode responder por mais de uma.
+   (`conducao.md`, etapa 2). "Não sei" é aceito: substituto em branco; sem quem responde, a área de dentro **nova não
+   se cria agora**: fica como assunto da área, com o diretor, até alguém assumir (`subareas.md`, seção 3, item 1). A
+   mesma pessoa pode responder por mais de uma; quem responde e quem substitui são pessoas diferentes.
    - **Nome e e-mail:** primeiro o gestor da plataforma daquela área (além do diretor). Se o nome ou apelido que o
      diretor deu bate com ele (o primeiro nome, ou um apelido que é o começo dele: "Gabi" e Gabriela), use-o sem
      perguntar; o nome completo sai do Slack pelo e-mail, ou da parte antes do @ (`conducao.md`, "Como mostrar o
@@ -199,20 +210,30 @@ quem decide ou quem lê". A skill não supõe área de dentro por causa do assun
    - **Substituto que o diretor não disse** (deixou em branco sem dizer "não sei"): uma pergunta antes da parada 2,
      com o porquê ("sem substituto, quando a pessoa sai de férias, o que for proposto ali espera").
 4. **O endereço (id) de cada uma:** sempre com o id da diretoria na frente (`logistica-last-mile`, `people-dp`;
-   `references/subareas.md`, seção 3), conferido no `listar` da raiz.
+   `references/subareas.md`, seção 4, "O id"), conferido no `listar` da raiz.
 5. ⏸ **Parada 2.** A **árvore indentada** debaixo da área (`conducao.md`, etapa 2): cada área de dentro como ramo de
-   `<Área>`, com quem responde, quem substitui e o endereço; as frentes num ramo à parte; e o efeito do pedido
-   (`subareas.md`, seção 2). Nunca diga que a área de dentro fica "fora" da área ou "fora da pasta": na hierarquia ela
-   é de `<Área>`. Só se o diretor perguntar por que o endereço é solto, uma linha (`conducao.md`, etapa 2). "Está
-   certo?" Com o sim, crie o plano local (`assets/plano-modelo.md`, seções 1 e 2) e entregue
-   `areas-de-dentro-<area>-AAAA-MM-DD.md` com o pedido **criar e abrir** cada área de dentro (e abrir a diretoria, se
-   ainda não está aberta) (`subareas.md`, seção 3). Os admins saem de `minhas_permissoes` com `com_admins: true`,
-   **sem quem roda**. Se quem roda é quem substitui, o pedido vai primeiro a quem responde, que manda ao admin
-   (`conducao.md`, etapa 2, entrega). Dar os nomes vale como o ok de pedir; o "está certo?" confirma a árvore.
-6. **Sem nenhuma área de dentro** (o normal numa área de dentro; numa diretoria, quando ninguém além do diretor
-   responde por um pedaço): a parada 2 mostra a árvore só com as frentes (`conducao.md`, etapa 2, "Só frentes") e não
-   há pedido, a menos que haja troca de quem responde. Numa área de dentro, a abertura para a empresa já veio no pedido
-   que a criou ("criar e abrir"): não se pede de novo. Na dúvida se um pedaço é área de dentro, a pergunta de
+   `<Área>`, com quem responde, quem substitui e o endereço; as frentes num ramo à parte. Nunca diga que a área de
+   dentro fica "fora" da área ou "fora da pasta": na hierarquia ela é de `<Área>`. Só se o diretor perguntar por que o
+   endereço é solto, uma linha (`conducao.md`, etapa 2). "Está certo?" O sim confirma a árvore, **não** é o ok de criar.
+   Com o sim, crie o plano local (`assets/plano-modelo.md`, seções 1 e 2).
+6. **Criar com o diretor** (só as áreas de dentro novas; `subareas.md`, seção 3, e `conducao.md`, etapa 2, "Criar"):
+   a conferência **uma por uma** (uma mensagem por área: nome, endereço, quem responde, quem substitui; "está certo?"),
+   depois o efeito em linguagem simples (o que é uma área de dentro, o que muda para quem responde, aberta ou fechada,
+   como se desfaz) e "posso criar?". **Só com o sim explícito**, `contexto_liv_up_criar_area` uma por área, e o
+   resultado numa mensagem. Se quem roda é quem substitui, antes da primeira conferência a pergunta do acordo de quem
+   responde; sem o acordo, não cria. Troca de quem responde numa área de dentro que já existe: a mesma conferência, o efeito, o ok e
+   `contexto_liv_up_definir_dono`. Se a ferramenta não aparece ou a plataforma recusa, aquela área vai ao pedido ao
+   admin, com o motivo em linguagem simples (`subareas.md`, seção 3, a tabela das recusas).
+7. **O pedido ao admin, só do que sobra** (`subareas.md`, seção 4): `areas-de-dentro-<area>-AAAA-MM-DD.md` com as
+   recusadas ou não criadas ("criar e abrir"), as criadas que nasceram fechadas ("abrir"), a diretoria se ainda não
+   está aberta ("abrir") e a troca de quem responde que a skill não faz daqui (regra 1). Sem nada disso, não há
+   arquivo. Os admins saem de
+   `minhas_permissoes` com `com_admins: true`, **sem quem roda**. Se quem roda é quem substitui e não houve o acordo,
+   o arquivo vai primeiro a quem responde (`conducao.md`, etapa 2, entrega).
+8. **Sem nenhuma área de dentro** (o normal numa área de dentro; numa diretoria, quando ninguém além do diretor
+   responde por um pedaço): a parada 2 mostra a árvore só com as frentes (`conducao.md`, etapa 2, "Só frentes"), nada
+   se cria e não há pedido, a menos que haja troca de quem responde na diretoria ou a área ainda não esteja aberta
+   (`aberta_para_a_empresa` no `listar`). Na dúvida se um pedaço é área de dentro, a pergunta de
    `conducao.md`, etapa 2, "Na dúvida".
 
 ## Etapa 3: o mínimo da área
@@ -236,7 +257,8 @@ indicadores, sem pastas de estratégia e projetos (entram depois do retreat).
    valor de remuneração e número financeiro**, que saem mesmo da definição (`fora-da-empresa.md`). Corte o sensível.
    Se o material **ou os apps da plataforma** mostram um pedaço com alguém que cuida do dia a dia que não está na
    árvore, pergunte numa linha se ele é área de dentro (com o porquê, e sem nome tirado das notas: diga o pedaço); se
-   for, entra no pedido como atualização; "não sei" deixa o pedaço como assunto da área, sem área própria, e "Em
+   for, faça a conferência dela, o efeito e o ok (`subareas.md`, seção 3) antes de seguir, e o que a plataforma
+   recusar entra no pedido como atualização; "não sei" deixa o pedaço como assunto da área, sem área própria, e "Em
    aberto" na visão geral.
 4. **O que falta, uma pergunta por vez, só o que o mínimo precisa:** o que a área faz (se nada escrito diz), com quem
    ela mais se relaciona e as perguntas que mais chegam. No máximo três; o resto vira "Em aberto" ou proposta marcada.
@@ -281,16 +303,18 @@ Recusa da publicação: "Quando travar", abaixo, e "Recusas na publicação".
 
 Só depois do mínimo publicado. Quem manda as mensagens é o diretor; a skill só entrega o texto (regra 2).
 
-1. **Confira se o admin já criou as áreas de dentro:** `contexto_liv_up_listar` na diretoria com `estrutura: true` e
-   compare `estrutura.responsaveis.subareas` com as do pedido (pelo id). Quem responde e quem substitui saem dali (o
-   que o admin gravou), não do pedido.
+1. **Confira que as áreas de dentro existem** (criadas na etapa 2 ou pelo admin): `contexto_liv_up_listar` na
+   diretoria com `estrutura: true` e compare `estrutura.responsaveis.subareas` com as da árvore (pelo id). Quem
+   responde e quem substitui saem dali (o que está gravado), não do plano.
 2. **As que já existem, com quem responde:** uma mensagem pronta para cada pessoa (`conducao.md`, etapa 4): o que é
    responder pela área, quem substitui, como instalar e rodar a carga dela e que ela começa pelo mínimo dela.
-3. **As que ainda não existem:** nenhuma mensagem. Diga numa linha que elas esperam o admin e que, assim que ele criar,
-   o diretor chama a carga com "mensagens das áreas de dentro" (`conducao.md`, etapa 4).
+3. **As que ainda não existem** (foram ao pedido ao admin): nenhuma mensagem. Diga numa linha que elas esperam o admin
+   e que, assim que ele criar, o diretor chama a carga com "mensagens das áreas de dentro" (`conducao.md`, etapa 4).
+   A área de dentro criada que nasceu fechada recebe a mensagem do mesmo jeito: fechada só quer dizer que a empresa
+   ainda não lê.
 4. **Sem quem responde:** sem mensagem; diga numa linha que ela fica com o diretor até alguém assumir.
 
-**Pedido "mensagens das áreas de dentro"** (o diretor voltando depois que o admin criou): sem a abertura literal. Faça
+**Pedido "mensagens das áreas de dentro"** (o diretor voltando depois que o admin criou as que faltavam): sem a abertura literal. Faça
 a etapa 1 (itens 1 e 2: quem roda responde ou substitui na diretoria) e vá direto a esta etapa, itens 1 a 4. Se o
 mínimo ainda não foi publicado, diga isso e ofereça seguir dele.
 
@@ -419,7 +443,7 @@ roda propõe sem publicar direto (nunca onde a chamada publicaria na hora) e ent
 do acompanhamento. Por padrão, em sequência: uma diretoria por vez, com a pasta de trabalho guardando o que a conversa
 não precisa segurar, e uma passada final que cruza somas e dependências. Com material grande (a régua está na C2) e
 subagentes (Claude Code), cada diretoria é montada por um, ao mesmo tempo. Valem as regras desta skill, menos a 1 (fica
-a proibição das ferramentas de admin), a 3 e a 11 (`references/estrategia.md`, seção 3, diz como cada uma vale na
+a proibição das ferramentas de admin, sem a exceção da etapa 2: a captura não cria área), a 3 e a 11 (`references/estrategia.md`, seção 3, diz como cada uma vale na
 captura). Nada de código inventado.
 
 Na captura, leia só `references/estrategia.md` (seções 1, 2, 3 e 5), `references/conducao.md` ("Captura", "Tom" e
@@ -429,8 +453,9 @@ reservadas, `references/forma-comum.md` (seção 4).
 
 ## O que esta skill não faz
 
-- Não cria área nem pasta noutra área; não troca quem responde; não concede nem revoga acesso; não abre nem fecha área
-  para a empresa (pede ao admin, no arquivo).
+- Não cria área na raiz nem pasta noutra área; cria área de dentro só da área que a pessoa responde ou substitui, com a
+  conferência e o ok dela (etapa 2); não troca quem responde pela diretoria; não marca sigilosa; não arquiva nem move
+  área; não concede nem revoga acesso; não abre nem fecha área para a empresa (pede ao admin, no arquivo).
 - Não manda mensagem a ninguém (entrega o texto pronto).
 - Não publica sem ok; não decide proposta de outra pessoa, exceto a da estratégia da própria área.
 - Não escreve meta nem projeto fora da etapa de estratégia e da captura; não migra área que está em outra forma.

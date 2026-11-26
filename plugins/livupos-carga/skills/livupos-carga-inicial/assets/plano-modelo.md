@@ -20,8 +20,11 @@ estrutura 3, mínimo espera a v3 (plataforma na 2) | anterior, sem migrar | desc
 | Frente (pasta, sem responsável próprio) | Para que serve | Referência |
 |---|---|---|
 
-Pedido ao admin: `areas-de-dentro-<area>-AAAA-MM-DD.md` (`references/subareas.md`, seção 3) · Estado: <não há |
-entregue em AAAA-MM-DD>
+Áreas de dentro criadas na carga (`references/subareas.md`, seção 3): <ids, com "fechada" quando nasceu fechada |
+nenhuma> · conferidas e com o ok em AAAA-MM-DD
+
+Pedido ao admin, só do que sobra (`references/subareas.md`, seção 4): `areas-de-dentro-<area>-AAAA-MM-DD.md` ·
+Estado: <não há | entregue em AAAA-MM-DD>
 
 Mensagens às áreas de dentro: <entregues em AAAA-MM-DD | esperam o mínimo>
 

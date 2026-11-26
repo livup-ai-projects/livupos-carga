@@ -152,6 +152,37 @@ falta dele, que leva a linha "a soma das diretorias não fecha a meta `<nome>` d
 abertos para a empresa por desenho; a regra de "número comercial de outra área" de `fora-da-empresa.md` vale para os
 números das outras áreas, que ficam no documento da empresa.
 
+### O modelo: objetivo, resultado-chave, projeto e projeto-chave (D160)
+
+A estratégia segue o modelo de OKR que a plataforma usa desde 26/11/2026 (D160):
+
+- o **objetivo** é aonde a área quer chegar;
+- o **resultado-chave** é a meta do objetivo (`metas`), com indicador, o valor comprometido e, se houver, a
+  aspiração;
+- o **projeto** é a iniciativa que move um ou mais resultados-chave: aponta a meta pelo id (`meta`) e, se quiser, o
+  efeito num indicador (`contribuicao`);
+- o **projeto-chave** é uma marca (`chave: true`) nos poucos projetos priorizados da área. Não é um nível acima dos
+  outros projetos.
+
+Nos documentos das áreas, o KPI do projeto quase sempre repete, pelo nome, um KPI do objetivo. Escreva no projeto o
+id dessa meta (`meta`). Não crie meta dentro do projeto.
+
+- O número do projeto não substitui o da meta. Se ele diverge do número da meta, vai como `efeito` na
+  `contribuicao`, e a divergência vai ao diretor. Nunca troque o `para` da meta por ele.
+- Se o KPI que o projeto cita não é meta de nenhum objetivo, pergunte ao diretor se ele vira resultado-chave do
+  objetivo ou se fica só como contribuição num indicador.
+
+"Projeto-chave" virou o nome de todo projeto do plano, porque o modelo do retreat chama a seção 4 de "projetos-chave".
+O nome da seção não marca nada. Marque `chave: true` só no que o material dá como prioridade: "top 3", "essencial",
+prioridade alta, ou o que o diretor escolheu.
+
+- O método pede uns 3 por área (o limite padrão é 5). Se a área quer outro limite, ele vai em
+  `limite_projetos_chave` na estratégia do ano da área.
+- Marque o que o material prioriza mesmo acima do limite. A conferência avisa o diretor, e você não corta.
+- Se a prioridade não está clara, pergunte ao diretor: "destes projetos, quais são os projetos-chave, os que fazem os
+  resultados-chave andar?". Não marque todos, e não escolha por ele.
+- Escreva exatamente `chave: true` (não `sim` nem `yes`: a plataforma só reconhece `true`).
+
 ### Metas com tipo e objetivos da área (D148)
 
 Nem toda meta é chegar a um número. Cada item de `metas` (da empresa e das áreas) tem um `tipo`; sem `tipo`, é
@@ -166,6 +197,7 @@ metas:
     de: "R$ 60 mi"
     de_em: 2026-10
     para: "+20%"                          # aceita o relativo: "+20%" sobre o de, "+3 p.p." num de em %
+    aspiracao: "+30%"                     # opcional (D160): o alvo ambicioso, além do para (o comprometido)
     prazo: 2027-12
     parciais:                             # opcional, só em chegar_a: o caminho até o para
       - { ate: 2027-S1, valor: "40%" }    # na unidade da meta, ou "%" do caminho de de a para
@@ -192,12 +224,21 @@ objetivos:                                # só na estratégia de uma área: obj
   passar (ou cair) durante o ano é `manter` ("ruptura abaixo de 3% todo mês"); algo que fica pronto ou não numa data é
   `entrega` ("abrir a primeira rede nova até junho"). Não se chama "marco": marco é a etapa de um projeto. Na dúvida
   entre dois, pergunte ao diretor com as duas formas escritas.
-- Os valores de `limite` vão entre aspas, com a unidade, como `de` e `para`.
+- Os valores de `limite` e de `aspiracao` vão entre aspas, com a unidade, como `de` e `para`.
+- **Comprometido e aspiração (D160):** quando o material traz dois números para a mesma meta ("budget e ambição",
+  "mínimo e alvo", "conservador e otimista"), o comprometido vai no `para` (ou no `limite`) e o ambicioso em
+  `aspiracao`.
+  - Na meta de manter um nível, a aspiração é um nível melhor que o limite, no mesmo sentido.
+  - Na entrega, não há aspiração.
+  - Aspiração aquém do comprometido, ou aspiração na entrega, é falta (conta na lista).
+  - Com um número só, não há aspiração: não invente.
+- **Quantos resultados-chave por objetivo:** de 3 a 5. Com mais de 5 metas de uma área no mesmo objetivo, a
+  conferência avisa, como informativo. É o diretor quem decide se corta.
 - **Composição:** `chegar_a` compõe por soma ou média, como antes; `manter` compõe por "todas dentro" e `entrega` por
   "todas entregues", sem conta. As partes de uma meta da empresa têm o mesmo tipo dela.
 - **Objetivo da área:** a meta ou o projeto da área pode apontar um objetivo da área em `objetivo`; o projeto conta
   para ele e para cada pilar de `serve_a`. Objetivo da área sem `serve_a` vira pergunta ao diretor.
-- **Mudar** `tipo`, `limite`, `sentido`, `periodo`, `criterio` ou `parciais` de uma meta publicada pede uma entrada nova
+- **Mudar** `tipo`, `limite`, `sentido`, `periodo`, `criterio`, `parciais` ou `aspiracao` de uma meta publicada pede uma entrada nova
   em `revisoes`, como `de`, `para` e `prazo` (D146): na conferência, a skill nunca troca esses campos em silêncio.
 - **Na tabela do texto,** a coluna do valor diz o que a meta é: "de X para Y" (`chegar_a`), "no máximo 3% todo mês"
   (`manter`), "entrega: <critério>" (`entrega`).
@@ -212,6 +253,8 @@ resumo: "Régua que fala com o cliente novo no dia 7, 21 e 40 para ele fazer o s
 tags: [projeto]
 id_acompanhamento: PRJ-016
 objetivo: reter-quem-ja-comprou
+meta: recompra-90-dias-growth-2027
+chave: true
 dono: dono.exemplo@livup.com.br
 contribuicao:
   - indicador: growth/indicadores/recompra-90-dias
@@ -256,7 +299,19 @@ diga e aponte quem cria>
   `"+3 p.p."`, `"de 90 para 45 dias"`, `"60%"`. Escreva como o material diz.
 - **Contribuição cujo indicador não existe:** `indicador: "a confirmar"`; o "Como saber se funcionou" diz o que medir,
   e a lista do que falta diz quem cria o indicador.
-- **Obrigatórios:** `id_acompanhamento`, `objetivo`, `dono` e `contribuicao`. `depende_de` só quando houver.
+- **Obrigatórios:** `id_acompanhamento`, `objetivo`, `dono` e o que o projeto move: `meta` (o id do resultado-chave,
+  ou uma lista) ou `contribuicao`. Os dois juntos é o melhor. `depende_de` só quando houver.
+- **`meta`** aponta a meta da estratégia do ano pelo id (da área ou da empresa). Meta que não está nos rascunhos nem na
+  estratégia da área é falta.
+- **`chave: true`** só no projeto-chave (seção "O modelo", acima). Sem o campo, o projeto não é chave: não escreva
+  `chave: false` em todos.
+- **`objetivos: [a, b]`** é para o projeto que serve a mais de um objetivo. Pode ficar sem o `objetivo` ou junto
+  dele, e os dois se somam. `proprio-da-area` não entra na lista.
+- **`pai`** é para o subprojeto: o caminho da visão geral do projeto de que ele é parte, sem `.md` e sem barra no
+  começo ou no fim (`growth/projetos/regua/visao-geral`; o código do projeto, `PRJ-016`, também vale). É um nível só, então o pai
+  não tem pai. Etapa, onda ou fase não é subprojeto: vai como marco na lista do acompanhamento. Subprojeto que o
+  material lista sem dono, código nem KPI próprio também não vira projeto: entra no texto do projeto, em "Tese" ou
+  "Fora do escopo".
   `condutor` (quem toca no dia a dia, se não é o dono) e `patrocinador` (a diretoria que cobra) são opcionais.
 - **Projeto com código e sem dono ou sem objetivo vai na proposta,** com `"a confirmar"` no campo e a linha na lista
   do diretor. Só o projeto sem código fica fora da proposta.
@@ -266,7 +321,8 @@ diga e aponte quem cria>
   traço, "N/A", "interno" ou o nome da área é silêncio, não "só da área": fica `"a confirmar"`. O `proprio-da-area`
   que só a planilha diz entra, como todo objetivo que só a planilha dá, no "Em aberto" para o diretor confirmar. Se o material não diz o objetivo, o campo fica `"a confirmar"` e a pergunta ao diretor
   dá as duas saídas ("serve a qual objetivo da Liv Up, ou é só da área?"). Projeto `proprio-da-area` não entra no que
-  falta por falta de objetivo; ainda precisa de dono, código e contribuição (um indicador da própria área).
+  falta por falta de objetivo; ainda precisa de dono, código e o que move (a `meta` ou a contribuição num indicador da
+  própria área).
 - **`dono` é UMA pessoa, pelo e-mail.** Ele e o `condutor` são a única exceção à troca de nome por papel desta skill:
   o projeto precisa de quem responde por ele. Quem toca o projeto, decidido no retreat, é dado do projeto (`condutor`), não mudança de
   lotação. O resto do texto segue a regra (papel, não nome).
@@ -472,8 +528,9 @@ Devolva, em até 60 linhas, sem repetir os rascunhos. Os itens 1, 6 e 9 nunca se
    sigilosa, qual e por quê (com os termos que tocam a decisão), sem mudar o texto;
 2. os documentos escritos (caminho e título);
 3. as metas: id, compoe ou objetivo, indicador, de, de_em, para, prazo;
-4. os projetos: código (ou "sem código"), título, objetivo, dono (papel), contribuições (indicador e efeito) e
-   depende_de (de quem, o que espera, marco);
+4. os projetos: código (ou "sem código"), título, objetivo (ou objetivos), dono (papel), a meta que move (`meta`),
+   se é projeto-chave e por quê (o trecho do material que o prioriza), o pai, se houver, contribuições (indicador e
+   efeito) e depende_de (de quem, o que espera, marco);
 5. o que falta, pela sua leitura, com quem responde (papel);
 6. o que o material de <Área> cita sobre outras diretorias, em qualquer seção: o que ela promete entregar e o que ela
    pede, com o trecho curto;
@@ -592,7 +649,7 @@ dela. Para duas pessoas que rodam a captura chegarem ao mesmo número:
   cada; contribuições que não chegam perto da meta, ou que passam dela, uma linha por meta, com os projetos). "Não
   chega perto" tem critério: com a mesma unidade, os efeitos somados ficam abaixo de metade do caminho entre o `de` e
   o `para`; "passa" é quando somados passam do `para`; meta sem nenhum projeto contribuindo também é "não chega
-  perto". Com unidade diferente ou efeito `"a confirmar"`, não conta. As linhas que o script marca "(informativo)"
+  perto", mas o projeto que aponta a meta pelo `meta` conta como projeto da meta, mesmo sem `contribuicao`. Com unidade diferente ou efeito `"a confirmar"`, não conta. As linhas que o script marca "(informativo)"
   não contam.
   Meta da empresa vai para a lista de `liv-up`. Entra o que
   responde o diretor ou um dono de projeto da diretoria; a linha juntada responde a diretoria;
@@ -908,7 +965,8 @@ mesma lista à mão, item por item:
    `proprio-da-area` num projeto não é falta.
 2. Indicador citado (em meta ou contribuição) que não existe no LivupOS nem nos rascunhos ("não conferido", se é de
    área que quem roda não lê).
-3. Meta sem `de`, `de_em`, `para` ou `prazo`, ou com `"a confirmar"` (valor e mês de hoje numa linha só). `de` ou `para` escritos sem aspas (aponte com
+3. Meta sem `de`, `de_em`, `para` ou `prazo`, ou com `"a confirmar"` (valor e mês de hoje numa linha só). Aspiração
+   na entrega, ou aquém do comprometido. Id de meta repetido. `de` ou `para` escritos sem aspas (aponte com
    todas as letras: sem aspas, `1.750` vira 1,75; não faça a conta nem compare a tabela com esse número). Metas da
    empresa sem indicador viram uma linha só, para quem decide `liv-up`.
 4. Meta da empresa sem `abre_em`. Meta da diretoria que não diz o que compõe nem a que objetivo serve. `compoe` que
@@ -920,7 +978,9 @@ mesma lista à mão, item por item:
    da diretoria com a parte aberta.
 6. Projeto sem código, com código fora do formato, com código repetido, ou que não está na lista. Nome ou dono que
    não batem com a lista.
-7. Projeto sem dono, com mais de um dono, ou com dono sem e-mail. Projeto sem objetivo ou sem contribuição. Projeto
+7. Projeto sem dono, com mais de um dono, ou com dono sem e-mail. Projeto sem objetivo, ou sem `meta` e sem
+   contribuição. `meta` que não existe. `objetivos` que não é lista. `chave` que não é true nem false. `pai` que não
+   existe, que tem pai ou que é o próprio projeto. Projeto
    numa pasta `projetos/` dentro de uma frente (não abre para a empresa). `efeito` da
    contribuição escrito sem aspas.
 8. `depende_de` que aponta projeto que não existe. Marco fora do formato, de outro projeto, ou que não está na lista.
@@ -931,7 +991,11 @@ mesma lista à mão, item por item:
 11. Data de marco ou entrega no texto do projeto (fora da linha de Fonte, de "Fora do escopo", de "Em aberto" e de
     data de fonte anterior ao ano da estratégia).
 12. Objetivo da empresa sem nenhuma meta nem projeto (informativo).
-13. Campo do sistema no cabeçalho (`camada`, `autoridade`, `status`, `owner`, `owner_id`, `revisar_em`): o LivupOS
+13. D160, informativos (não contam): projetos-chave demais na área (acima de `limite_projetos_chave`, ou de 5);
+    meta que nenhum projeto-chave move (só na área que marcou algum; a subárea conta à parte da diretoria);
+    objetivo com mais de 5 metas da mesma área. A aspiração na entrega ou aquém do comprometido não é informativa:
+    é falta, no item 3.
+14. Campo do sistema no cabeçalho (`camada`, `autoridade`, `status`, `owner`, `owner_id`, `revisar_em`): o LivupOS
     recusa.
 
 A conta não julga. O que só lendo se acha fica para a leitura do diretor na parada 7: projeto que promete algo que o

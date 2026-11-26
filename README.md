@@ -11,4 +11,4 @@ No Claude Code:
 
 Depois, numa conversa nova: "quero montar o contexto de <área> no LivupOS". É preciso ter o conector do LivupOS ligado.
 
-Gerado de livup/livupos-carga-inicial, commit dc9a387, versão 2026-11-25.2.
+Gerado de livup/livupos-carga-inicial, commit fd9a888, versão 2026-11-26.1.
