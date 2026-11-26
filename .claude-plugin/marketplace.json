@@ -1,0 +1,14 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "livupos-carga",
+  "description": "Carga inicial do contexto das áreas da Liv Up no LivupOS (distribuição temporária).",
+  "owner": { "name": "Liv Up" },
+  "plugins": [
+    {
+      "name": "livupos-carga",
+      "description": "Monta com o diretor (ou com quem responde por uma área) a estrutura e o mínimo do contexto da área no LivupOS.",
+      "version": "2026-11-25.2",
+      "source": "./plugins/livupos-carga"
+    }
+  ]
+}
