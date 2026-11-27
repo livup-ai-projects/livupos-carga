@@ -11,7 +11,7 @@ description: |
   ou para retomar. Não use para
   correção pontual (`livupos-contribuir`), para aprovar propostas (`livupos-curadoria`) nem para criar diretoria (admin).
 metadata:
-  versao: "2026-11-27.3"
+  versao: "2026-11-27.4"
   estrutura: "4"
   molde: "brain-livup (condução), roteiro de 25/11/2026 (estrutura primeiro e o mínimo) e estrutura v4, a raiz fixa (lugar)"
 ---
@@ -147,8 +147,10 @@ a testar); use-os como forma, não como conteúdo nem como lista do que a sua á
 
 1. `contexto_liv_up_minhas_permissoes`. Três casos:
    - a área aparece com `publicar_direto: true`: confira que a pessoa responde ou substitui, e não é só admin
-     (`admin_livupos` na resposta publica direto em todas as áreas). Confira com `contexto_liv_up_conexoes` com
-     `area: { area: "<id>", visao: "conceitos" }`: `area.papel` igual a `owner_ou_substituto` confirma;
+     (`admin_livupos` na resposta publica direto em todas as áreas). Confira pelo item 2: o `email` de `dono` ou de
+     `substituto` em `estrutura.responsaveis` (herdado também vale) igual ao de quem roda confirma. Não use
+     `contexto_liv_up_conexoes` com `area` para isso: o LivupOS não tem mais grafo da área (D167) e ele responde
+     vazio;
    - a área aparece, mas sem `publicar_direto`: pare; diga quem responde e quem substitui (do item 2);
    - a área não aparece: pare. **Não diga que a área não existe** ("não consigo ver a área nem quem responde por ela;
      quem sabe é o admin do LivupOS") e mostre os admins (`minhas_permissoes` com `com_admins: true`).

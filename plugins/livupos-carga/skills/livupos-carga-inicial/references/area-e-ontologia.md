@@ -1,7 +1,9 @@
 # O que é da área e o que é da ontologia da empresa
 
 O contexto da área é o que pessoas **decidem** e como trabalham. A ontologia é o que **existe** com identidade estável
-nos sistemas e nos dados. A carga escreve só o primeiro e aponta o segundo.
+nos sistemas e nos dados. A carga escreve só o primeiro e aponta o segundo. Desde a D167 do LivupOS (27/11/2026), a
+ontologia é só a dos sistemas: o que existe é apontado nas fichas de `tech/sistemas/*` (e no catálogo de Dados); não
+há espaço `ontologia` nem ontologia de área.
 
 | Da ontologia da empresa (a carga aponta) | Da área (a carga escreve) |
 |---|---|
@@ -22,7 +24,7 @@ pasta do Drive).
   e aponta a entidade.
 - **Atributo cujo valor alguém decide:** "taxa por degrau" é atributo da chamada de parceiro, e o valor é regra da área.
 - **Dimensão cuja lista a área decide:** "motivo de impacto": a lista mora no sistema, quem decide o que cada motivo
-  significa é a área. O documento da área tem o significado; a ontologia, quando existir, aponta para ele.
+  significa é a área. O documento da área tem o significado; a ficha do sistema, quando existir, aponta para ele.
 - **Fonte que vale:** se o mesmo número está em dois lugares (o custo planejado em dois apps), quem decide qual vale é a
   regra da área.
 
@@ -33,7 +35,7 @@ pasta do Drive).
    outra área** vira link para a ficha da área dona (ou nome e área em texto) e também sai desta lista; o **uso** que o
    time faz de um sistema de outra área, quando tem regra, é documento da área em `geral/`; **ferramenta de uso
    geral** não entra. Para o resto (sistema de tech, tabela, entidade), procure o documento que já existe
-   (`tech/sistemas/*` ou o espaço `ontologia`, com `contexto_liv_up_buscar`).
+   (`tech/sistemas/*`, com `contexto_liv_up_buscar`).
 2. **Existe:** no documento da área, só link. No glossário, definição curta, onde mora e o link.
    **Existe só em parte** (há documento da integração com o sistema, como o envio de pedidos à Abbiamo, mas não do
    sistema em si): link para o que existe e o sistema vai para a lista do item 3.
@@ -42,6 +44,8 @@ pasta do Drive).
    do BigQuery entra na mesma lista, marcada "métrica, para o catálogo de Dados".
    A lista entra sempre como **uma nota da área** (`origem.ref`: `carga-inicial/<area>/o-que-falta-fora-da-area`),
    mostrada antes de publicar a leva. A skill não propõe nada noutro espaço: uma proposta lá chega a outro owner, e a carga só fala
-   com quem está rodando. No fechamento, sugere ao owner levar a lista a quem cuida da ontologia e do catálogo de Dados.
-4. Nunca escreva `<area>/ontologia.yaml`, nem um documento que descreva sistema de tech, tabela ou integração. Sistema
+   com quem está rodando. No fechamento, sugere ao owner levar a lista a tech (as fichas dos sistemas) e ao catálogo de
+   Dados.
+4. A área não tem ontologia: não escreva nada de ontologia na área, nem um documento que descreva sistema de tech,
+   tabela ou integração. Sistema
    da área tem documento, mas só a parte humana (para que serve, quem usa, quem cuida), nunca a estrutura.

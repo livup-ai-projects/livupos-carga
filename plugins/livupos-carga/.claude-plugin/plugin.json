@@ -1,6 +1,6 @@
 {
   "name": "livupos-carga",
   "description": "Carga inicial do contexto de uma área da Liv Up no LivupOS: a estrutura, o mínimo revisado com quem responde e a passagem às áreas de dentro.",
-  "version": "2026-11-27.3",
+  "version": "2026-11-27.4",
   "author": { "name": "Liv Up" }
 }

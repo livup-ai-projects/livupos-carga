@@ -599,8 +599,8 @@ Depois, as sugestões que valem (cada uma numa linha, e a pessoa decide):
 > - As mensagens às áreas que ainda estão no pedido ao admin vão depois que ele criar.
 > - O app `<nome>` mostra o mesmo texto que agora está publicado. O ideal é ele passar a ler do LivupOS a parte
 >   oficial, e manter com ele o que é trabalho do time.
-> - `<N>` termos são de sistema ou métricas que ainda não estão na ontologia nem no catálogo de Dados. Deixei a lista
->   numa nota da área; se quiser, leve a quem cuida da ontologia e ao time de Dados.
+> - `<N>` termos são de sistema ou métricas que ainda não têm ficha em `tech/sistemas` nem estão no catálogo de Dados.
+>   Deixei a lista numa nota da área; se quiser, leve a tech e ao time de Dados.
 > - A `<skill ou agente do time>` tem uma cópia das regras que agora estão publicadas. O ideal é ela passar a ler daqui.
 > - `<N>` notas do seu Livup Brain viraram texto oficial. Se quiser, eu ponho em cada uma o link para o documento.
 >   Só com o seu ok, e sem mexer no diário nem nas reuniões.

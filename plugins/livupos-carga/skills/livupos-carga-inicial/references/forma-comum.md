@@ -41,7 +41,7 @@ Regras para usar:
    abaixo da 4): essa é estrutura 4, qualquer que seja o `versao_da_area`. A área na 3 tem um caso próprio (seção 6,
    "Área na estrutura 3").
    **Documentos** aqui são os da área, fora `agentes/`, as pastas da plataforma (`foruns/`, `canais/`, `notas/`,
-   `curadoria/`, `dados-publicados/`, `estrutura-dos-apps/`, `ontologia/` e `ontologia.yaml`), os pedidos que a
+   `curadoria/`, `dados-publicados/`, `estrutura-dos-apps/` e `ontologia/`), os pedidos que a
    plataforma grava em `sistemas/<app>/pedidos` e as pastas reservadas que só têm a visão geral de texto fixo: eles
    não fazem uma área vazia virar antiga.
 3. **A skill garante sozinha** (a plataforma começa só observando):
@@ -52,7 +52,7 @@ Regras para usar:
      em `<area>/indicadores/` e os sistemas em `<area>/sistemas/`, nunca dentro de `geral/`;
    - **dentro de `geral/`, nenhum nome reservado**, em nível nenhum (seção 3);
    - **nunca cria as pastas da plataforma** (`foruns/`, `canais/`, `notas/`, `curadoria/`, `dados-publicados/`,
-     `estrutura-dos-apps/`) nem `agentes/`, `ontologia/`, `ontologia.yaml` ou `sistemas/<app>/pedidos`: quem escreve
+     `estrutura-dos-apps/`) nem `agentes/`, `ontologia/` ou `sistemas/<app>/pedidos`: quem escreve
      nelas é a plataforma;
    - o tipo dos documentos básicos que a carga **cria**: o de `documentos_basicos[].tipo`, com o campo; o de
      `moldes.md`, sem ele. Esse tipo vence o "copie o tipo dos vizinhos". Documento que já existe mantém o tipo que tem.
@@ -105,7 +105,7 @@ A mesma em toda área e em toda área de dentro. **Na raiz, só estes nomes:**
 
 Também podem estar na raiz, mas **a skill nunca cria nem mexe:** `agentes/` (reservada, da plataforma de agentes) e as
 pastas da plataforma, `foruns/`, `canais/`, `notas/`, `curadoria/`, `dados-publicados/`, `estrutura-dos-apps/`,
-`ontologia/` e `ontologia.yaml` (o que a definição devolver em `pastas_da_plataforma`). Elas guardam o que a plataforma
+`ontologia/` (o que a definição devolver em `pastas_da_plataforma`). Elas guardam o que a plataforma
 grava por caminho fixo (atas, canais, notas, critérios da curadoria, a estrutura e os dados publicados dos apps) e não
 mudam de lugar (a tela do LivupOS pode vir a agrupá-las, mas o caminho é este; não fale disso ao diretor).
 

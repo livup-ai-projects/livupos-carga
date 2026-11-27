@@ -55,12 +55,10 @@ que ela apontar. Todas as chamadas abaixo são de leitura.
   fonte citável ("ata da Daily de Roteirização de 20/10/2026"), mas diz o que foi dito naquele dia: use para datar uma
   regra, não para afirmar que ela vale hoje.
 - Para cada sistema, tabela ou entidade que o material cita: `contexto_liv_up_buscar` sem filtro de área (os sistemas
-  de tech moram em `tech/sistemas/*`) e, se existir, no espaço `ontologia`. Guarde caminho e título para o link. O
+  de tech moram em `tech/sistemas/*`). Guarde caminho e título para o link. O
   que a própria área administra e de que um processo dela depende (app do time em que ele registra, planilha que é
   fonte de verdade de um processo, SaaS ou ERP que a área contrata) é sistema da área: ficha própria em
   `<area>/sistemas/`, não link (`moldes.md`, "Sistema da área", tem a ordem de decisão).
-- `contexto_liv_up_conexoes` com `area: { area: "<id>", visao: "conceitos" }` (a visão completa pode passar de 100
-  mil caracteres), se ela já tem documentos: mostra tabelas e apps que eles citam.
 - **Repositório do time** (`CLAUDE.md`, `README.md`, `DEPLOY.md` de um repositório que o time abre) é fonte citável
   pelo nome do repositório e do arquivo. O que descreve o sistema fica em `tech/sistemas` (aponte); o que o time decide
   sobre como trabalha com ele (regra de deploy, de revisão, de quem aprova) é da área.
