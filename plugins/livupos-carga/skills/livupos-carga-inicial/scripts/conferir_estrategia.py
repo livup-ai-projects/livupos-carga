@@ -57,6 +57,14 @@ SECOES_PROJETO = ["Tese", "Como saber se funcionou", "Fora do escopo", "Riscos"]
 ABRE_EM = {"soma", "media", "nao abre"}
 QUEM_MONTOU = "quem montou os rascunhos"
 CAMPOS_DE_SISTEMA = ("camada", "autoridade", "status", "owner", "owner_id", "revisar_em")
+def ids_compoe(meta):
+    """As metas da empresa que esta meta compõe: um id ou uma lista (o painel aceita os dois)."""
+    v = meta.get("compoe")
+    if isinstance(v, list):
+        return [x for x in v if isinstance(x, str) and x.strip()]
+    return [v] if isinstance(v, str) and v.strip() else []
+
+
 TIPOS_META = {"chegar a", "manter", "entrega"}  # D148; sem tipo é chegar_a
 SENTIDOS = {"no minimo", "no maximo"}
 PERIODOS = {"mensal", "trimestral", "semestral", "anual"}
@@ -382,7 +390,9 @@ def main():
     objetivos_area = defaultdict(dict)  # D148: objetivos da área, com serve_a (os pilares da empresa)
 
     def conferir_objetivo(caminho, obj, prefixo, quem, obrigatorio):
-        da_area = objetivos_area.get(caminho.split("/")[0], {})
+        area_c = caminho.split("/")[0]
+        # Projeto de subárea pode servir a um objetivo da diretoria-pai (a estratégia mora nela); o painel aceita.
+        da_area = {**objetivos_area.get(dona(area_c), {}), **objetivos_area.get(area_c, {})}
         if sem_valor(obj):
             if obrigatorio:
                 falta(caminho, f"{prefixo}falta dizer a que objetivo da empresa serve" + (", ou se é só da área" if not prefixo else ""), quem)
@@ -474,11 +484,18 @@ def main():
             conferir_objetivo(caminho, meta.get("objetivo"), pre, quem, True)
             if norm(meta.get("abre_em") or "") not in ABRE_EM:
                 falta(caminho, f"{pre}falta dizer como abre nas diretorias (soma, media ou nao_abre)", quem)
-        elif meta.get("compoe"):
-            if (objetivos or metas_empresa) and meta["compoe"] not in metas_empresa:
-                falta(caminho, f"{pre}diz compor a meta da empresa `{meta['compoe']}`, que não existe", quem)
-        elif meta.get("objetivo"):
-            conferir_objetivo(caminho, meta.get("objetivo"), pre, quem, False)
+        elif meta.get("compoe") or meta.get("objetivo"):
+            if meta.get("compoe"):
+                ids = ids_compoe(meta)
+                bruto = meta["compoe"]
+                if not ids or (isinstance(bruto, list) and len(ids) < len(bruto)):
+                    falta(caminho, f"{pre}`compoe` leva o id da meta da empresa (ou uma lista de ids), como texto; está: {bruto}", QUEM_MONTOU)
+                for cid in ids:
+                    if (objetivos or metas_empresa) and cid not in metas_empresa:
+                        falta(caminho, f"{pre}diz compor a meta da empresa `{cid}`, que não existe", quem)
+            # A meta pode compor uma da empresa e servir a um objetivo da área ao mesmo tempo (o painel lê os dois).
+            if meta.get("objetivo"):
+                conferir_objetivo(caminho, meta.get("objetivo"), pre, quem, False)
         elif objetivos:
             falta(caminho, f"{pre}não diz a que meta ou objetivo da empresa serve", quem)
 
@@ -555,8 +572,8 @@ def main():
         metas = lista_de_campos(cab, "metas", falta, caminho, quem)
         for meta in metas:
             conferir_meta(caminho, meta, quem, False)
-            if meta.get("compoe"):
-                compoe[meta["compoe"]].append((caminho, meta))
+            for cid in ids_compoe(meta):
+                compoe[cid].append((caminho, meta))
         conferir_tabela(caminho, metas, corpo, quem)
         datas = datas_no_texto(corpo, ano_estrategia)
         if datas:
@@ -848,8 +865,15 @@ def main():
                 limite = v
             else:
                 falta(c_lim, f"`limite_projetos_chave` ({v}) não é um número inteiro positivo: vale o padrão, {LIMITE_PROJETOS_CHAVE}", QUEM_MONTOU)
-        if len(lst) > limite:
+        if len(lst) > limite and area not in limite_chave:
+            # 27/11/2026: o que a área leva ao retreat é chave e o retreat corta; a carga declara o limite.
+            onde = next((c for c in diretorias if c.split("/")[0] == area), None)
+            dica = "na estratégia do ano da área" if onde else f"numa estratégia do ano de {area} (o limite é da própria área; a subárea precisa da estratégia dela)"
+            falta(onde or f"{area}/projetos", f"{len(lst)} projetos-chave em {area}, acima do padrão ({LIMITE_PROJETOS_CHAVE}): declare `limite_projetos_chave: {len(lst)}` {dica} (o retreat corta a lista)", QUEM_MONTOU)
+        elif len(lst) > limite:
             falta(f"{area}/projetos", f"{len(lst)} projetos-chave em {area} (o limite é {limite}): escolha os que ficam com a marca (informativo)", f"diretor(a) de {dona(area)}")
+        elif len(lst) > LIMITE_PROJETOS_CHAVE:
+            falta(f"{area}/projetos", f"a área leva {len(lst)} projetos-chave ao retreat; o método pede de 3 a 5 (informativo)", f"diretor(a) de {dona(area)}")
     todos_chave = [x for lst in chaves.values() for x in lst]
     for mid, (c_meta, meta) in todas_metas.items():
         area = c_meta.split("/")[0]
@@ -862,6 +886,18 @@ def main():
     for mid, (c_meta, meta) in todas_metas.items():
         if isinstance(meta.get("objetivo"), str) and not sem_valor(meta.get("objetivo")):
             por_objetivo[(c_meta, meta["objetivo"])].append(mid)
+    # A árvore (27/11/2026): cada objetivo da área tem pelo menos um resultado-chave.
+    com_meta = set()
+    for (c, oid) in por_objetivo:
+        area_m = c.split("/")[0]
+        com_meta.add((area_m, oid))
+        if oid in objetivos_area.get(dona(area_m), {}):  # meta de subárea que serve a um objetivo da diretoria-pai
+            com_meta.add((dona(area_m), oid))
+    estrategia_da_area = {c.split("/")[0]: c for c in diretorias}
+    for area, objs in sorted(objetivos_area.items()):
+        for oid in sorted(objs):
+            if (area, oid) not in com_meta:
+                falta(estrategia_da_area.get(area, f"{area}/estrategia"), f"objetivo `{oid}` sem nenhum resultado-chave (a árvore pede pelo menos uma meta por objetivo) (informativo)", f"diretor(a) de {dona(area)}")
     for (c_meta, oid), mids in sorted(por_objetivo.items()):
         if len(mids) > LIMITE_RESULTADOS_POR_OBJETIVO:
             falta(c_meta, f"objetivo `{oid}` com {len(mids)} metas (o método pede de 3 a 5): {', '.join(mids)} (informativo)", f"diretor(a) de {dona(c_meta.split('/')[0])}" if not c_meta.startswith("liv-up/") else "diretoria executiva")

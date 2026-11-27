@@ -7,7 +7,7 @@
     {
       "name": "livupos-carga",
       "description": "Monta com o diretor (ou com quem responde por uma área) a estrutura e o mínimo do contexto da área no LivupOS.",
-      "version": "2026-11-27.1",
+      "version": "2026-11-27.2",
       "source": "./plugins/livupos-carga"
     }
   ]

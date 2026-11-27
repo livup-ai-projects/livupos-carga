@@ -140,8 +140,9 @@ metas:
 
 Mesmo formato, sem os objetivos da empresa; pode ter **objetivos da área**, cada um com `serve_a` (abaixo). Título
 "Estratégia de `<Área>` 2027". Cada meta traz `compoe: <id da meta da
-empresa>` quando é parte dela, ou `objetivo: <id do objetivo da empresa>` quando é meta própria da diretoria (que não
-compõe nenhuma meta da empresa, mas serve a um objetivo). Na tabela, a coluna "Como abre" vira "Compõe": o id da
+empresa>` (um id ou uma lista) quando é parte dela, e `objetivo: <id do objetivo>` (da área ou da empresa) para dizer a
+que objetivo serve. A meta própria da diretoria (que não compõe nenhuma meta da empresa) leva só o `objetivo`; a que
+compõe uma meta da empresa e é resultado-chave de um objetivo da área leva os dois. Na tabela, a coluna "Como abre" vira "Compõe": o id da
 meta da empresa ou, na meta própria, "própria: `<nome do objetivo>`". Depois da
 tabela, uma seção "Por que estas metas" com as escolhas que o material explica, e "Em aberto". Data de entrega ou de
 marco também não entra no texto da estratégia: vai para o acompanhamento. O documento da diretoria traz só os números
@@ -162,8 +163,11 @@ A estratégia segue o modelo de OKR que a plataforma usa desde 26/11/2026 (D160)
   aspiração;
 - o **projeto** é a iniciativa que move um ou mais resultados-chave: aponta a meta pelo id (`meta`) e, se quiser, o
   efeito num indicador (`contribuicao`);
-- o **projeto-chave** é uma marca (`chave: true`) nos poucos projetos priorizados da área. Não é um nível acima dos
-  outros projetos.
+- o **projeto-chave** é uma marca (`chave: true`) nos projetos que a área leva ao retreat como projetos-chave. Não é
+  um nível acima dos outros projetos. O que fica abaixo de um projeto-chave é o subprojeto (`pai`).
+
+A árvore que a liderança usa: cada objetivo tem pelo menos um resultado-chave (com indicador) e cada resultado-chave
+tem pelo menos um projeto-chave que o move.
 
 Nos documentos das áreas, o KPI do projeto quase sempre repete, pelo nome, um KPI do objetivo. Escreva no projeto o
 id dessa meta (`meta`). Não crie meta dentro do projeto.
@@ -173,16 +177,25 @@ id dessa meta (`meta`). Não crie meta dentro do projeto.
 - Se o KPI que o projeto cita não é meta de nenhum objetivo, pergunte ao diretor se ele vira resultado-chave do
   objetivo ou se fica só como contribuição num indicador.
 
-"Projeto-chave" virou o nome de todo projeto do plano, porque o modelo do retreat chama a seção 4 de "projetos-chave".
-O nome da seção não marca nada. Marque `chave: true` só no que o material dá como prioridade: "top 3", "essencial",
-prioridade alta, ou o que o diretor escolheu.
+**Quem é projeto-chave (27/11/2026, decisão da liderança):** tudo o que a área leva ao retreat como projeto-chave é
+projeto-chave. É o retreat que corta a lista, não a carga.
 
-- O método pede uns 3 por área (o limite padrão é 5). Se a área quer outro limite, ele vai em
-  `limite_projetos_chave` na estratégia do ano da área.
-- Marque o que o material prioriza mesmo acima do limite. A conferência avisa o diretor, e você não corta.
-- Se a prioridade não está clara, pergunte ao diretor: "destes projetos, quais são os projetos-chave, os que fazem os
-  resultados-chave andar?". Não marque todos, e não escolha por ele.
-- Escreva exatamente `chave: true` (não `sim` nem `yes`: a plataforma só reconhece `true`).
+- Marque `chave: true` em todo projeto que a tabela-resumo do material (o apêndice A2, coluna "Projetos-chave") lista.
+  Isso vale mesmo quando a coluna traz quase todos os projetos da área.
+- Projeto que só aparece no texto (seção 4) e não está na coluna da A2 não leva a marca. É o caso de "aposta",
+  "outros projetos com potencial" e "oportunidades", quando a área separa esses da lista.
+- A prioridade que o material dá ("top 3", "essencial", alta, média, baixa) não decide a marca. Ela vai no texto do
+  projeto e no resumo ao diretor, para a conversa do corte no retreat.
+- Um item da coluna que é etapa de outro projeto ("fluxo X, etapa do projeto 2") não vira projeto-chave. Siga a regra
+  do `pai`, abaixo: etapa é marco; subprojeto com dono e KPI próprios é projeto com `pai`.
+- Sem a A2, ou com a coluna vazia ou só com o exemplo do modelo, pergunte ao diretor: "todos os projetos da seção 4
+  vão ao retreat como projetos-chave? Se não, quais?". Não marque nada antes da resposta, e não escolha por ele.
+- **Limite:** o padrão da plataforma é 5 projetos-chave por área. Com mais de 5 marcados, escreva
+  `limite_projetos_chave: <quantos foram marcados>` na estratégia do ano da área. A lista do diretor ganha a linha
+  informativa "a área leva N projetos-chave ao retreat; o método pede de 3 a 5". Assim o painel não avisa a área
+  inteira antes do corte, e o número fica à vista. Depois do retreat, o limite volta a ser o que a área aprovou.
+- Escreva exatamente `chave: true` (não `sim` nem `yes`, nem `"true"` entre aspas: a plataforma só reconhece o
+  booleano `true`, e com aspas o documento publica sem contar como projeto-chave).
 
 ### Metas com tipo e objetivos da área (D148)
 
@@ -227,8 +240,9 @@ objetivos:                                # só na estratégia de uma área: obj
   entre dois, pergunte ao diretor com as duas formas escritas.
 - Os valores de `limite` e de `aspiracao` vão entre aspas, com a unidade, como `de` e `para`.
 - **Comprometido e aspiração (D160):** quando o material traz dois números para a mesma meta ("budget e ambição",
-  "mínimo e alvo", "conservador e otimista"), o comprometido vai no `para` (ou no `limite`) e o ambicioso em
-  `aspiracao`.
+  "mínimo e alvo", "conservador e otimista", "budget e cenário otimista"), o comprometido vai no `para` (ou no
+  `limite`) e o ambicioso em `aspiracao`. O número ambicioso que só aparece no texto de um projeto também é da meta:
+  leve-o para a `aspiracao` da meta que o projeto move, e não deixe só no `efeito` da contribuição.
   - Na meta de manter um nível, a aspiração é um nível melhor que o limite, no mesmo sentido.
   - Na entrega, não há aspiração.
   - Aspiração aquém do comprometido, ou aspiração na entrega, é falta (conta na lista).
@@ -530,7 +544,8 @@ Devolva, em até 60 linhas, sem repetir os rascunhos. Os itens 1, 6 e 9 nunca se
 2. os documentos escritos (caminho e título);
 3. as metas: id, compoe ou objetivo, indicador, de, de_em, para, prazo;
 4. os projetos: código (ou "sem código"), título, objetivo (ou objetivos), dono (papel), a meta que move (`meta`),
-   se é projeto-chave e por quê (o trecho do material que o prioriza), o pai, se houver, contribuições (indicador e
+   se é projeto-chave (está na coluna "Projetos-chave" da A2 ou não) e a prioridade que o material dá, o pai, se
+   houver, contribuições (indicador e
    efeito) e depende_de (de quem, o que espera, marco);
 5. o que falta, pela sua leitura, com quem responde (papel);
 6. o que o material de <Área> cita sobre outras diretorias, em qualquer seção: o que ela promete entregar e o que ela
@@ -971,7 +986,8 @@ mesma lista à mão, item por item:
    todas as letras: sem aspas, `1.750` vira 1,75; não faça a conta nem compare a tabela com esse número). Metas da
    empresa sem indicador viram uma linha só, para quem decide `liv-up`.
 4. Meta da empresa sem `abre_em`. Meta da diretoria que não diz o que compõe nem a que objetivo serve. `compoe` que
-   aponta meta que não existe.
+   aponta meta que não existe, ou que não é um id (ou lista de ids) em texto. Mais de 5 projetos-chave numa área sem
+   `limite_projetos_chave` declarado (declare com o número marcado: o retreat corta a lista).
 5. Metas da diretoria que não fecham a da empresa: some (`soma`) ou tire a média simples (`media`) do `para` das metas
    que dizem compor. Se a média tem peso, peça o peso, sem chamar de erro. Unidade diferente: confira à mão. Com uma
    parte "a confirmar", faça a conta com as conhecidas e diga quanto a parte aberta precisa dar para fechar (na
@@ -992,7 +1008,9 @@ mesma lista à mão, item por item:
 11. Data de marco ou entrega no texto do projeto (fora da linha de Fonte, de "Fora do escopo", de "Em aberto" e de
     data de fonte anterior ao ano da estratégia).
 12. Objetivo da empresa sem nenhuma meta nem projeto (informativo).
-13. D160, informativos (não contam): projetos-chave demais na área (acima de `limite_projetos_chave`, ou de 5);
+13. D160, informativos (não contam): projetos-chave acima do `limite_projetos_chave` declarado; com o limite
+    declarado acima de 5 e cumprido, a linha "a área leva N projetos-chave ao retreat; o método pede de 3 a 5";
+    objetivo da área sem nenhum resultado-chave (a árvore pede pelo menos uma meta por objetivo);
     meta que nenhum projeto-chave move (só na área que marcou algum; a subárea conta à parte da diretoria);
     objetivo com mais de 5 metas da mesma área. A aspiração na entrega ou aquém do comprometido não é informativa:
     é falta, no item 3.
