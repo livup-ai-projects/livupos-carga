@@ -379,8 +379,8 @@ Uma por área de dentro com quem responde:
 > > `<área de dentro>`, a resposta sai do que você aprovou. Eu continuo respondendo por `<Área>` como um todo.
 > >
 > > Para começar:
-> > 1. Instale a carga inicial do LivupOS no Claude Code (se já tem, pule), digitando um comando de cada vez:
-> >    `/plugin marketplace add livup-ai-projects/livupos-carga` e depois `/plugin install livupos-carga@livupos-carga`.
+> > 1. Instale a carga inicial do LivupOS (se já tem, pule): no Claude Code (a aba Code do app do Claude serve), cole o
+> >    link https://github.com/livup-ai-projects/livupos-carga e peça "instala essa skill"; depois reinicie o app.
 > > 2. Confira que o conector do LivupOS está ligado, abra uma conversa nova e escreva "quero montar o contexto de
 > >    `<área de dentro>` no LivupOS".
 > >

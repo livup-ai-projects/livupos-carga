@@ -11,7 +11,7 @@ description: |
   ou para retomar. Não use para
   correção pontual (`livupos-contribuir`), para aprovar propostas (`livupos-curadoria`) nem para criar diretoria (admin).
 metadata:
-  versao: "2026-11-27.4"
+  versao: "2026-11-27.5"
   estrutura: "4"
   molde: "brain-livup (condução), roteiro de 25/11/2026 (estrutura primeiro e o mínimo) e estrutura v4, a raiz fixa (lugar)"
 ---
