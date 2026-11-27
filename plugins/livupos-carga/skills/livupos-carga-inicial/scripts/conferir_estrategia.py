@@ -71,7 +71,6 @@ PERIODOS = {"mensal", "trimestral", "semestral", "anual"}
 PRAZO = re.compile(r"^\d{4}(-(0[1-9]|1[0-2])(-\d{2})?|-[TtQq][1-4]|-[Ss][12])?$")  # mês, trimestre, semestre, ano, data
 PROPRIO = "proprio-da-area"  # projeto só da área, sem objetivo da empresa, por decisão (não é falta)
 # D160 (OKR): objetivo → resultado-chave (a meta) ← projeto; projeto-chave é a marca `chave: true` no projeto.
-LIMITE_PROJETOS_CHAVE = 5  # o padrão; a estratégia do ano da área pode declarar outro em `limite_projetos_chave`
 LIMITE_RESULTADOS_POR_OBJETIVO = 5  # o método pede de 3 a 5 resultados-chave por objetivo
 
 
@@ -857,23 +856,15 @@ def main():
 
     # D160: projetos-chave demais; meta que nenhum projeto-chave move (só onde a diretoria marcou algum); objetivo
     # com mais de 5 resultados-chave. Informativos, como no painel: o diretor decide.
+    # D166 (27/11/2026): sem limite padrão; só a área que declara `limite_projetos_chave` tem limite.
     for area, lst in sorted(chaves.items()):
-        limite = LIMITE_PROJETOS_CHAVE
-        if area in limite_chave:
-            c_lim, v = limite_chave[area]
-            if isinstance(v, int) and not isinstance(v, bool) and v > 0:
-                limite = v
-            else:
-                falta(c_lim, f"`limite_projetos_chave` ({v}) não é um número inteiro positivo: vale o padrão, {LIMITE_PROJETOS_CHAVE}", QUEM_MONTOU)
-        if len(lst) > limite and area not in limite_chave:
-            # 27/11/2026: o que a área leva ao retreat é chave e o retreat corta; a carga declara o limite.
-            onde = next((c for c in diretorias if c.split("/")[0] == area), None)
-            dica = "na estratégia do ano da área" if onde else f"numa estratégia do ano de {area} (o limite é da própria área; a subárea precisa da estratégia dela)"
-            falta(onde or f"{area}/projetos", f"{len(lst)} projetos-chave em {area}, acima do padrão ({LIMITE_PROJETOS_CHAVE}): declare `limite_projetos_chave: {len(lst)}` {dica} (o retreat corta a lista)", QUEM_MONTOU)
-        elif len(lst) > limite:
-            falta(f"{area}/projetos", f"{len(lst)} projetos-chave em {area} (o limite é {limite}): escolha os que ficam com a marca (informativo)", f"diretor(a) de {dona(area)}")
-        elif len(lst) > LIMITE_PROJETOS_CHAVE:
-            falta(f"{area}/projetos", f"a área leva {len(lst)} projetos-chave ao retreat; o método pede de 3 a 5 (informativo)", f"diretor(a) de {dona(area)}")
+        if area not in limite_chave:
+            continue
+        c_lim, v = limite_chave[area]
+        if not (isinstance(v, int) and not isinstance(v, bool) and v > 0):
+            falta(c_lim, f"`limite_projetos_chave` ({v}) não é um número inteiro positivo: a área fica sem limite", QUEM_MONTOU)
+        elif len(lst) > v:
+            falta(f"{area}/projetos", f"{len(lst)} projetos-chave em {area} (o limite declarado é {v}): escolha os que ficam com a marca (informativo)", f"diretor(a) de {dona(area)}")
     todos_chave = [x for lst in chaves.values() for x in lst]
     for mid, (c_meta, meta) in todas_metas.items():
         area = c_meta.split("/")[0]

@@ -190,10 +190,9 @@ projeto-chave. É o retreat que corta a lista, não a carga.
   do `pai`, abaixo: etapa é marco; subprojeto com dono e KPI próprios é projeto com `pai`.
 - Sem a A2, ou com a coluna vazia ou só com o exemplo do modelo, pergunte ao diretor: "todos os projetos da seção 4
   vão ao retreat como projetos-chave? Se não, quais?". Não marque nada antes da resposta, e não escolha por ele.
-- **Limite:** o padrão da plataforma é 5 projetos-chave por área. Com mais de 5 marcados, escreva
-  `limite_projetos_chave: <quantos foram marcados>` na estratégia do ano da área. A lista do diretor ganha a linha
-  informativa "a área leva N projetos-chave ao retreat; o método pede de 3 a 5". Assim o painel não avisa a área
-  inteira antes do corte, e o número fica à vista. Depois do retreat, o limite volta a ser o que a área aprovou.
+- **Limite (D166, 27/11/2026):** não há limite padrão de projetos-chave por área. Não escreva
+  `limite_projetos_chave` por conta própria. Ele só entra se o diretor (ou a liderança, depois do retreat) quiser um
+  teto para a área: aí vai na estratégia do ano da área, e o painel avisa quando a área passa dele.
 - Escreva exatamente `chave: true` (não `sim` nem `yes`, nem `"true"` entre aspas: a plataforma só reconhece o
   booleano `true`, e com aspas o documento publica sem contar como projeto-chave).
 
@@ -986,8 +985,8 @@ mesma lista à mão, item por item:
    todas as letras: sem aspas, `1.750` vira 1,75; não faça a conta nem compare a tabela com esse número). Metas da
    empresa sem indicador viram uma linha só, para quem decide `liv-up`.
 4. Meta da empresa sem `abre_em`. Meta da diretoria que não diz o que compõe nem a que objetivo serve. `compoe` que
-   aponta meta que não existe, ou que não é um id (ou lista de ids) em texto. Mais de 5 projetos-chave numa área sem
-   `limite_projetos_chave` declarado (declare com o número marcado: o retreat corta a lista).
+   aponta meta que não existe, ou que não é um id (ou lista de ids) em texto. `limite_projetos_chave` que não é inteiro
+   positivo (a área fica sem limite).
 5. Metas da diretoria que não fecham a da empresa: some (`soma`) ou tire a média simples (`media`) do `para` das metas
    que dizem compor. Se a média tem peso, peça o peso, sem chamar de erro. Unidade diferente: confira à mão. Com uma
    parte "a confirmar", faça a conta com as conhecidas e diga quanto a parte aberta precisa dar para fechar (na
@@ -1008,9 +1007,8 @@ mesma lista à mão, item por item:
 11. Data de marco ou entrega no texto do projeto (fora da linha de Fonte, de "Fora do escopo", de "Em aberto" e de
     data de fonte anterior ao ano da estratégia).
 12. Objetivo da empresa sem nenhuma meta nem projeto (informativo).
-13. D160, informativos (não contam): projetos-chave acima do `limite_projetos_chave` declarado; com o limite
-    declarado acima de 5 e cumprido, a linha "a área leva N projetos-chave ao retreat; o método pede de 3 a 5";
-    objetivo da área sem nenhum resultado-chave (a árvore pede pelo menos uma meta por objetivo);
+13. D160, informativos (não contam): projetos-chave acima do `limite_projetos_chave` que a área declarou (sem a
+    declaração não há limite, D166); objetivo da área sem nenhum resultado-chave (a árvore pede pelo menos uma meta por objetivo);
     meta que nenhum projeto-chave move (só na área que marcou algum; a subárea conta à parte da diretoria);
     objetivo com mais de 5 metas da mesma área. A aspiração na entrega ou aquém do comprometido não é informativa:
     é falta, no item 3.
