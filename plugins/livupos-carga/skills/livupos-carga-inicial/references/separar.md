@@ -4,14 +4,16 @@ O trabalho mais longo da carga, e o que a pessoa não vê. Faça nesta ordem, fi
 
 ## 1. Classificar cada ficha ou documento de origem
 
-Cada pedaço recebe uma classe (abaixo) e, se vira documento, uma frente ou área de dentro (`forma-comum.md`, seção 2). Sai de
-quem procura: "quem cuida disso aqui?". O mesmo documento de origem pode se dividir entre frentes.
+Cada pedaço recebe uma classe (abaixo) e, se vira documento, um lugar: a área de dentro que é dona dele, ou uma pasta
+dentro de `geral/` (a frente, ou a pasta que o time procura), ou `sistemas/` e `indicadores/` na raiz
+(`forma-comum.md`, seções 2 e 3). Sai de quem procura: "quem cuida disso aqui?". O mesmo documento de origem pode se
+dividir entre frentes.
 
 | Classe | Sinais | Destino |
 |---|---|---|
 | Processo ou regra | passo a passo, "quem faz", "quando", regras vigentes, exceções | documento oficial (tipo `processo`) |
 | Indicador | fórmula, meta, fonte do dado, frequência | um documento por indicador em `indicadores/`, sem a fórmula e sem a meta |
-| Ritual | daily, semanal, comitê, checkpoint: objetivo, participantes, cadência | uma linha na seção Rituais da visão geral da área; documento na frente só se tem regra própria |
+| Ritual | daily, semanal, comitê, checkpoint: objetivo, participantes, cadência | uma linha na seção Rituais da visão geral da área; documento em `geral/` (na frente dele) só se tem regra própria |
 | De outra área | o dono é de outra área (expansão, comercial de varejo) | uma linha na visão geral ou termo na seção de outras áreas do glossário; não vira documento |
 | Acompanhamento de projetos | status de projeto, "roda?", candidatos, colunas de acompanhamento de agente ou app | sai; fica no app |
 | Projeto, meta ou plano do ano | tese de projeto, meta de indicador para o ano, plano de ação, OKR | não sobe na carga: vai para o plano como "espera a estratégia" (`forma-comum.md`, seção 4) |

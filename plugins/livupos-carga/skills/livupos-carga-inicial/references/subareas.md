@@ -10,8 +10,15 @@ no pedido ao admin em arquivo (seção 4). A skill nunca abre área.
 ## 1. Quando um pedaço vira área de dentro
 
 **Quando tem alguém que cuida do dia a dia** (`forma-comum.md`, seção 2). Pode ser uma gerência ou uma frente de
-trabalho. Pedaço sem ninguém que cuide é frente (pasta dentro da área). O critério antigo ("só quando muda quem decide
-ou quem lê") não vale mais.
+trabalho. Pedaço sem ninguém que cuide é frente (pasta dentro de `geral/` da área). O critério antigo ("só quando muda
+quem decide ou quem lê") não vale mais.
+
+**A área de dentro tem a mesma raiz fixa** (`forma-comum.md`, seções 1 e 7): visão geral, glossário, `geral/` e
+`sistemas/` dela, `indicadores/` se tiver, com o endereço dela na frente (`people-dp/geral/...`,
+`people-dp/sistemas/...`). **Cada coisa mora na área mais específica que é dona dela:** o processo que só a área de
+dentro conduz fica no `geral/` dela, e o sistema que só ela administra tem a ficha no `sistemas/` dela. A área de cima
+**aponta** (uma linha na visão geral, com o link, ou "na carga de `<área de dentro>`"), não duplica. Na carga da
+diretoria, o que é de uma área de dentro fica para a carga dela (o plano anota: `assets/plano-modelo.md`, seção 5).
 
 Se a área já tem áreas de dentro, a carga respeita a divisão que existe e confirma quem responde e quem substitui em
 cada uma. Uma área de dentro que já existe e é sigilosa segue como está (quem muda isso é o admin do LivupOS, não a

@@ -5,15 +5,15 @@ description: |
   primeiro a estrutura (a área, quem responde e quem substitui, as áreas de dentro e quem responde por cada uma,
   criadas com o ok dele; abrir fica num pedido ao admin), depois o mínimo (visão geral e glossário), publicado só com o ok dele, e então
   uma mensagem pronta para cada responsável rodar a carga da área de dentro. Sistemas, indicadores e os documentos do
-  dia a dia vêm depois, opcionais. Tudo abre para a empresa; dado de pessoa nunca entra. Também monta e confere a
+  dia a dia vêm depois (os sistemas sempre; o resto, opcional). Tudo abre para a empresa; dado de pessoa nunca entra. Também monta e confere a
   estratégia do ano depois do retreat. Use para "quero subir o contexto da minha área", "carga inicial do LivupOS",
   "montar a estrutura da minha diretoria no LivupOS", "mensagens das áreas de dentro", "conferir a estratégia da minha diretoria",
   ou para retomar. Não use para
   correção pontual (`livupos-contribuir`), para aprovar propostas (`livupos-curadoria`) nem para criar diretoria (admin).
 metadata:
-  versao: "2026-11-26.1"
-  estrutura: "3"
-  molde: "brain-livup (condução), roteiro de 25/11/2026 (estrutura primeiro e o mínimo) e estrutura v3 (lugar)"
+  versao: "2026-11-27.1"
+  estrutura: "4"
+  molde: "brain-livup (condução), roteiro de 25/11/2026 (estrutura primeiro e o mínimo) e estrutura v4, a raiz fixa (lugar)"
 ---
 
 ## PRIMEIRA RESPOSTA: copiar literalmente
@@ -59,7 +59,7 @@ FIM
 
 A especificação desta skill é `docs/roteiro-guiado.md` no repositório `livup/livupos-carga-inicial`; ele não vai no
 pacote instalado e não precisa ser procurado. Este arquivo é a versão operacional. O que a pessoa lê em cada etapa
-está em `references/conducao.md`; onde cada coisa mora, em `references/forma-comum.md` (estrutura 3).
+está em `references/conducao.md`; onde cada coisa mora, em `references/forma-comum.md` (estrutura 4, a raiz fixa).
 
 ## Regras que não mudam
 
@@ -87,9 +87,10 @@ a testar); use-os como forma, não como conteúdo nem como lista do que a sua á
 4. **Toda afirmação cita uma fonte que qualquer pessoa abre**, ou a confirmação de quem responde pela área, com a data.
    Vault pessoal não é fonte citável: é pista (`references/fontes.md`, seção 5), e vira fonte quando o diretor confirma.
 5. **Não preenche lacuna com suposição plausível.** Sem fonte, vira pergunta ou "Em aberto".
-6. **Sistema de tech não se descreve; aponta-se. Sistema da área ganha documento** (opcional, etapa 5;
-   `references/moldes.md`, "Sistema da área"). Nunca dado, credencial nem estrutura de tabela. Nada de campo novo no
-   frontmatter além dos de `references/moldes.md` (o único acréscimo é `estrutura: 3`, só na visão geral da área).
+6. **Sistema de outra área (inclusive de tech) não se descreve; aponta-se. Sistema de que a área é dona ganha a ficha
+   em `<area>/sistemas/`** (etapa 5; `references/moldes.md`, "Sistema da área"). Nunca dado, credencial nem estrutura
+   de tabela. Nada de campo novo no frontmatter além dos de `references/moldes.md` (o único acréscimo é
+   `estrutura: 4`, só na visão geral da área).
    Exceção: a estratégia e os projetos levam os campos de `references/estrategia.md`, seção 2.
 7. **Uma cópia só.** Se um app mostra o mesmo texto, a sugestão é o app ler do LivupOS, nunca manter dois textos.
 8. **Dado de pessoa nunca entra, em lugar nenhum do LivupOS:** salário, avaliação, saúde, licença, desligamento,
@@ -104,9 +105,13 @@ a testar); use-os como forma, não como conteúdo nem como lista do que a sua á
     quem responde por ela, publicar, entregar o pedido ao admin, depositar nota, registrar o resultado: diga o que acontece, quem passa a ver, quem passa a decidir e como se
     desfaz. Os textos estão em `references/conducao.md` e `references/subareas.md`. Se a pessoa responder sem ter
     entendido o efeito, explique de novo antes de agir.
-11. **A área nasce na estrutura 3** (`references/forma-comum.md`): `estrutura: 3` na visão geral (número inteiro, sem
-    aspas), glossário geral em `<area>/glossario` (temas em `glossario/<tema>`), nada solto ao lado de pastas, sem frente dentro de frente, pasta vazia não
-    existe. Área que já tem documentos em outra forma não é migrada pela carga (`forma-comum.md`, seção 6).
+11. **A área nasce na estrutura 4, a raiz fixa** (`references/forma-comum.md`): `estrutura: 4` na visão geral
+    (número inteiro, sem aspas); na raiz, só a visão geral, o glossário geral (`<area>/glossario`, temas em
+    `glossario/<tema>`), `geral/`, `sistemas/`, `indicadores/` e as reservadas; o conteúdo do time, livre, dentro de
+    `geral/` (a frente é `geral/<frente>/`), sem nome reservado em nível nenhum; a skill nunca cria as pastas da
+    plataforma (`foruns/`, `canais/`, `notas/`, `curadoria/`, `dados-publicados/`, `estrutura-dos-apps/`); pasta vazia
+    não existe. Área que já tem documentos em outra forma, inclusive na 3, não é migrada pela carga (`forma-comum.md`,
+    seção 6).
 12. **Uma pergunta por mensagem, sempre com o porquê.** Antes de cada pergunta, uma frase dizendo para que a resposta
     serve. "Não sei" é resposta e nunca trava: vira "Em aberto" ou fica em branco. O que dá para ler numa ferramenta
     não se pergunta; o que a pessoa já disse não se pergunta de novo. Exceção: na conferência da estratégia, perguntas
@@ -123,8 +128,9 @@ a testar); use-os como forma, não como conteúdo nem como lista do que a sua á
 ## Arquivos desta skill
 
 - `references/conducao.md`: o que a pessoa lê em cada etapa, a trilha, o tom e o que dizer quando trava.
-- `references/forma-comum.md`: a estrutura 3: a árvore, o mínimo, frente × área de dentro, `geral/` e listas, as
-  pastas reservadas, área na forma anterior, área de dentro.
+- `references/forma-comum.md`: a estrutura 4 (a raiz fixa): a árvore, o mínimo, frente × área de dentro, `geral/`
+  livre e os nomes reservados, `sistemas/` e o que é sistema, as pastas reservadas, área na forma anterior (e na 3),
+  área de dentro.
 - `references/subareas.md`: as áreas de dentro: quando, o porquê de cada pergunta, o id único, criar com o diretor
   (conferência, efeito, ok, recusas) e o pedido ao admin do que sobra.
 - `references/fontes.md`: como puxar de cada lugar (Livup Brain e notas do diretor, apps, Drive, Notion, LivupOS).
@@ -165,8 +171,12 @@ a testar); use-os como forma, não como conteúdo nem como lista do que a sua á
    guardou. Se existir, leia, mostre em que etapa parou e siga dali. Sem o plano, use o que já está publicado
    (`itens`) para não refazer nada: o mínimo está feito quando há glossário e a visão geral já lista as áreas de
    dentro; senão, a visão geral que existe é **alterada** no mínimo, não criada de novo.
-   Plano com "mínimo pronto, espera a v3" e a plataforma já na versão 3: confira a área e as áreas de dentro (podem
+   Plano com "mínimo pronto, espera a v4" e a plataforma já na versão 4: confira a área e as áreas de dentro (podem
    ter sido criadas na carga ou pelo admin), atualize na visão geral quem responde por cada uma e vá direto à parada 3 com o rascunho.
+   Plano com "espera a v3" (de antes de 27/11): o rascunho está na forma 3. Antes da parada 3, passe-o para a forma 4
+   (`estrutura: 4`; frente citada como assunto em `geral/`; nenhuma lista na raiz; sistemas em `sistemas/`) e mostre
+   na revisão, como bloco mudado, o que mudou de lugar. Com a plataforma ainda abaixo da 4, nada se publica
+   (`forma-comum.md`, seção 0, item 6).
 5. `contexto_liv_up_pendencias`: se há proposta aberta do time central em `estrategia/` ou `projetos/` da área, anote
    para o fechamento.
 
@@ -179,7 +189,7 @@ sem `responsaveis`), a pergunta da mensagem é essa, e a da etapa 2 vem na mensa
 ## Etapa 2: as áreas de dentro
 
 O critério (`references/forma-comum.md`, seção 2): **o pedaço tem alguém que cuida do dia a dia?** Tem: área de dentro
-(gerência ou frente de trabalho). Não tem: frente, uma pasta dentro da área. Sem o critério antigo de "só quando muda
+(gerência ou frente de trabalho). Não tem: frente, uma pasta dentro de `geral/` da área. Sem o critério antigo de "só quando muda
 quem decide ou quem lê". A skill não supõe área de dentro por causa do assunto: quem diz quais existem é o diretor.
 
 1. **O que já se sabe, antes de perguntar de novo.** Três lugares, só leitura:
@@ -281,7 +291,7 @@ indicadores, sem pastas de estratégia e projetos (entram depois do retreat).
      `<Área>` em AAAA-MM-DD"; o vault não é citado. Não há lista de confirmação à parte.
    - O diretor pode dizer "pode passar o resto" a qualquer momento: mostre o resto numa mensagem só, com as mesmas
      marcas, e siga.
-   Depois da passada, o efeito de publicar e "Posso publicar?". Com a plataforma ainda na versão 2
+   Depois da passada, o efeito de publicar e "Posso publicar?". Com a plataforma ainda abaixo da versão 4
    (`forma-comum.md`, seção 0, item 6), a revisão acontece igual, mas no fim vem o texto "A forma nova ainda não
    entrou" (`conducao.md`, etapa 1) no lugar do efeito: guarde o texto revisado no plano (seção 3) e encerre; a
    retomada mostra o que mudou desde a revisão e pede o ok de novo.
@@ -289,7 +299,9 @@ indicadores, sem pastas de estratégia e projetos (entram depois do retreat).
      no plano, diga como retomar (`conducao.md`, etapa 3, "Não publica agora") e encerre sem registrar resultado.
 7. Com o "pode publicar": `contexto_liv_up_propor_mudanca` com as duas mudanças (`criar`; documento que já existe, a
    visão geral ou o glossário, é `alterar`, com o `revisao_base_id` lido agora), origem `carga-inicial/<area>/minimo`,
-   justificativa no formato de `moldes.md`. Atualize o plano local (caminho e `revisao_id`).
+   justificativa no formato de `moldes.md`. Atualize o plano local (caminho e `revisao_id`). Área na estrutura 3 que
+   já cabe na raiz fixa: a alteração da visão geral troca `estrutura: 3` por `estrutura: 4`, dito no efeito e no
+   Resumo (`forma-comum.md`, seção 6, "Área na estrutura 3").
 
 **Se o diretor travar no mínimo** (sem tempo, sem resposta, "depois eu vejo"): o plano guarda onde parou, e a saída é
 **quem substitui na diretoria**, não as áreas de dentro: entregue a mensagem pronta para ele mandar a quem substitui
@@ -318,14 +330,22 @@ Só depois do mínimo publicado. Quem manda as mensagens é o diretor; a skill s
 a etapa 1 (itens 1 e 2: quem roda responde ou substitui na diretoria) e vá direto a esta etapa, itens 1 a 4. Se o
 mínimo ainda não foi publicado, diga isso e ofereça seguir dele.
 
-## Etapa 5: sistemas e indicadores (opcional)
+## Etapa 5: sistemas e indicadores
 
-Duas perguntas, uma por vez, cada uma com o porquê e puláveis (`conducao.md`, etapa 5). "Pular" não deixa pendência.
+Logo depois do mínimo publicado (ou das mensagens da etapa 4). Duas perguntas, uma por vez, cada uma com o porquê
+(`conducao.md`, etapa 5). Os sistemas são base de toda área (`forma-comum.md`, seção 3): a pergunta sempre é feita, e
+"depois" é resposta (fica no plano como pendência, para a próxima conversa). Os indicadores são opcionais: "pular" não
+deixa pendência.
 
-- **Sistemas:** mapear em que sistemas os processos da área acontecem (apps do App Builder, sistemas externos,
-  planilhas em que o time registra) e como funcionam na prática. Para cada um que o diretor citar, decida pelo molde
-  (`moldes.md`, "Sistema da área": de tech é link; da área ganha documento curto; de uma área de dentro fica para a
-  carga dela).
+- **Sistemas:** de que sistemas os processos da área dependem: apps da plataforma de apps internos, SaaS ou sistemas
+  externos que a área contrata, ERP, e planilhas que são fonte de verdade de um processo (o time registra nelas e o
+  processo depende delas). Antes de perguntar, junte o que já se sabe e mostre na pergunta: os apps da área na
+  plataforma (`fontes.md`, seção 1), as fichas que a área já tem em `sistemas/` e os sistemas que o material citou.
+  Para cada um, decida pelo molde (`moldes.md`, "Sistema da área", a ordem de "Quem ganha a ficha"): ferramenta de uso
+  geral não entra; sistema que outra área administra (inclusive tech) é link para a ficha do dono, ou o nome e a área
+  em texto; sistema compartilhado tem a ficha na área que administra, e o uso do time vai para `geral/`; planilha de
+  trabalho ou análise não é sistema; sistema que uma área de dentro administra fica para a carga dela. O que a área
+  administra ganha a ficha em `<area>/sistemas/<sistema>`, uma por sistema.
 - **Indicadores:** os números que a área acompanha. Para cada um, a definição em uma ou duas linhas e de onde vem o
   número (`moldes.md`, Indicador), com a busca no catálogo de Dados. O id do termo do catálogo é opcional.
 
@@ -340,7 +360,8 @@ processos, políticas, rituais com regra), hoje ou noutra sessão.
 Para o que é da diretoria e não de uma área de dentro, depois do mínimo. Segue o fluxo por leva:
 
 1. **Material e separação.** O que ficou anotado no plano e o que o diretor trouxer. Classifique por tipo
-   (`references/tipos-de-contexto.md`) e por lugar (`geral/` da área, frente, lista; `forma-comum.md`); cruze
+   (`references/tipos-de-contexto.md`) e por lugar (`geral/` e a pasta dentro dele, `sistemas/`, `indicadores/`, ou
+   uma área de dentro; `forma-comum.md`); cruze
    confirmações; corte o sensível; separe o que espera a estratégia; monte a tabela pessoa → papel
    (`separar.md`, seção 6). Material acima de ~50 mil caracteres com subagentes disponíveis: leia num subagente.
 2. **Plano da leva** (⏸): a lista de documentos com o lugar, de onde sai, o que falta perguntar e a quem. Prazo de
@@ -359,10 +380,10 @@ Para o que é da diretoria e não de uma área de dentro, depois do mínimo. Seg
 Recusa `validacao` ou de formato do Resumo: corrija só a forma (frontmatter, Resumo, tamanho, caminho) e tente de novo;
 se a correção muda o conteúdo aprovado, mostre de novo e espere o ok. `conflito` com `mesmo_autor: true`: revise a
 proposta aberta com `contexto_liv_up_atualizar_proposta`, reenviando todas as mudanças. `conflito` com proposta de outra
-pessoa: não contorne; registre no plano e siga. Recusa por causa da forma (glossário fora do lugar, documento solto):
-documento novo, reenvie no caminho da estrutura 3 e diga numa frase; documento que já existe (área na forma anterior),
+pessoa: não contorne; registre no plano e siga. Recusa por causa da forma (glossário fora do lugar, documento solto na raiz, nome reservado dentro de `geral/`):
+documento novo, reenvie no caminho da estrutura 4 e diga numa frase; documento que já existe (área na forma anterior),
 não mexa: "espera a migração". Recusa por causa do campo `estrutura`: diga que a plataforma ainda não aceita a marca de
-versão, publique sem ela só com o ok, e registre no plano "marcar `estrutura: 3` quando a plataforma aceitar". Nunca
+versão, publique sem ela só com o ok, e registre no plano "marcar `estrutura: 4` quando a plataforma aceitar". Nunca
 use a ferramenta de mover. Qualquer outra recusa: "Quando travar".
 
 ## Etapa 6: fechar
@@ -453,7 +474,8 @@ reservadas, `references/forma-comum.md` (seção 4).
 
 ## O que esta skill não faz
 
-- Não cria área na raiz nem pasta noutra área; cria área de dentro só da área que a pessoa responde ou substitui, com a
+- Não cria área na raiz nem pasta noutra área, nem as pastas da plataforma (`foruns/`, `canais/`, `notas/`,
+  `curadoria/`, `dados-publicados/`, `estrutura-dos-apps/`) na própria; cria área de dentro só da área que a pessoa responde ou substitui, com a
   conferência e o ok dela (etapa 2); não troca quem responde pela diretoria; não marca sigilosa; não arquiva nem move
   área; não concede nem revoga acesso; não abre nem fecha área para a empresa (pede ao admin, no arquivo).
 - Não manda mensagem a ninguém (entrega o texto pronto).

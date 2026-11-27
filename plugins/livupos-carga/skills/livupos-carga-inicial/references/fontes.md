@@ -15,9 +15,9 @@ que ela apontar. Todas as chamadas abaixo são de leitura.
    nome e pergunte à pessoa quais são do time. A busca por nome não garante que todos apareceram: na conferência do material,
    pergunte se falta algum app.
 3. Para cada app: nome, `description`, `creator`, `owner_area`, `aberto`. O app do time em que ele registra, decide
-   ou opera é um **sistema da área**: ganha documento na lista `sistemas/` (da área ou da frente que o usa) (`moldes.md`, "Sistema da área"), com a
+   ou opera é um **sistema da área**: ganha a ficha em `<area>/sistemas/` (`moldes.md`, "Sistema da área"), com a
    `description` como ponto de partida e a estrutura que a plataforma já gera
-   (`<area do owner_area>/estrutura-dos-apps/<app>.yaml`) apontada em texto, nunca copiada. Painel e relatório ficam
+   (`<area>/estrutura-dos-apps/<app>.yaml`, só o caminho achado no `listar` ou no `buscar`) apontada em texto, nunca copiada. Painel e relatório ficam
    só numa linha da visão geral. Todos vão para a visão geral ("Sistemas e apps")
    e é a forma de achar onde mora um valor: frases como "fonte oficial", "metas mantidas no próprio app", "lê a
    planilha X" dizem qual fonte vale (`moldes.md`, "Regras de texto", item "Valor que mora noutro lugar").
@@ -56,9 +56,9 @@ que ela apontar. Todas as chamadas abaixo são de leitura.
   regra, não para afirmar que ela vale hoje.
 - Para cada sistema, tabela ou entidade que o material cita: `contexto_liv_up_buscar` sem filtro de área (os sistemas
   de tech moram em `tech/sistemas/*`) e, se existir, no espaço `ontologia`. Guarde caminho e título para o link. O
-  que não é de tech e o time usa como sistema (app do time em que ele registra, planilha em que o time registra e
-  consulta, sistema que a área contrata) é sistema da área: documento próprio, não link (`moldes.md`, "Sistema da
-  área", tem a ordem de decisão).
+  que a própria área administra e de que um processo dela depende (app do time em que ele registra, planilha que é
+  fonte de verdade de um processo, SaaS ou ERP que a área contrata) é sistema da área: ficha própria em
+  `<area>/sistemas/`, não link (`moldes.md`, "Sistema da área", tem a ordem de decisão).
 - `contexto_liv_up_conexoes` com `area: { area: "<id>", visao: "conceitos" }` (a visão completa pode passar de 100
   mil caracteres), se ela já tem documentos: mostra tabelas e apps que eles citam.
 - **Repositório do time** (`CLAUDE.md`, `README.md`, `DEPLOY.md` de um repositório que o time abre) é fonte citável

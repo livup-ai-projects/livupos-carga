@@ -740,7 +740,7 @@ def main():
                     or area in sem_leitura):
                 falta(caminho, f"a pasta `{area}/` não é diretoria com estratégia, subárea declarada (--subareas) nem área que existe: confira se a subárea existe; se não, o projeto vai para a diretoria", QUEM_MONTOU)
         elif "projetos" in partes_cam[1:-2] and partes_cam[-1] == "visao-geral":
-            falta(caminho, f"projeto numa pasta `projetos/` dentro de uma frente: ali ele não abre para a empresa; mova para `{area}/projetos/` (ou para a subárea do time, se ela existe)", QUEM_MONTOU)
+            falta(caminho, f"projeto numa pasta `projetos/` dentro de `geral/` ou de uma frente: ali ele não abre para a empresa; mova para `{area}/projetos/` (ou para a subárea do time, se ela existe)", QUEM_MONTOU)
         elif "projetos" not in partes_cam:
             falta(caminho, f"documento com a tag `projeto` fora de `projetos/`: o projeto mora em `{area}/projetos/<projeto>/visao-geral`", QUEM_MONTOU)
         contrib = lista_de_campos(cab, "contribuicao", falta, caminho, quem)

@@ -29,8 +29,9 @@ pasta do Drive).
 ## Na carga
 
 1. Para cada sistema, tabela ou entidade citada, primeiro separe pela ordem de `moldes.md`, "Sistema da área":
-   **sistema da área** ganha documento da área na lista `sistemas/` (da área ou da frente que o usa) e sai desta lista; **sistema de outra área**
-   vira link para o documento da área dona (ou nome e área em texto) e também sai desta lista; **ferramenta de uso
+   **sistema da área** (o que a área administra) ganha a ficha em `<area>/sistemas/` e sai desta lista; **sistema de
+   outra área** vira link para a ficha da área dona (ou nome e área em texto) e também sai desta lista; o **uso** que o
+   time faz de um sistema de outra área, quando tem regra, é documento da área em `geral/`; **ferramenta de uso
    geral** não entra. Para o resto (sistema de tech, tabela, entidade), procure o documento que já existe
    (`tech/sistemas/*` ou o espaço `ontologia`, com `contexto_liv_up_buscar`).
 2. **Existe:** no documento da área, só link. No glossário, definição curta, onde mora e o link.

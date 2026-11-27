@@ -3,8 +3,10 @@
 As áreas chegam com material diferente. O Last Mile tinha fichas prontas num app. People traz políticas, valores,
 regras de cálculo da folha e definições de indicadores, parte delas já escrita dentro de skills e agentes que o time
 usa. Outra área pode não ter quase nada escrito. A skill não muda de etapa conforme a área: muda a fonte e o molde. Ao
-ler o material, classifique cada pedaço num dos tipos abaixo e no lugar dele (área de dentro, `geral/`, frente, lista;
-`forma-comum.md`), e use o molde do tipo ao escrever. O tipo diz o molde; o lugar diz a pasta. Nunca crie pasta por tipo (`politicas/`).
+ler o material, classifique cada pedaço num dos tipos abaixo e no lugar dele (área de dentro, `geral/` e a pasta
+dentro dele, `sistemas/`, `indicadores/`; `forma-comum.md`), e use o molde do tipo ao escrever. O tipo diz o molde; o
+lugar diz a pasta. Dentro de `geral/`, a pasta é a que o time procura: por frente, por assunto ou, se o time procura
+assim, por tipo (`geral/politicas/`); nunca com nome reservado (`forma-comum.md`, seção 3), e nunca na raiz da área.
 
 | Tipo | Exemplos | Molde | `tipo` no frontmatter |
 |---|---|---|---|
@@ -16,8 +18,8 @@ ler o material, classifique cada pedaço num dos tipos abaixo e no lugar dele (�
 | Regra de cálculo | o que entra na prévia da folha, qual verba vai em cada conta contábil (se é de uma área de dentro, entra pela carga dela) | Regra de cálculo (abaixo) | `processo` |
 | Indicador | absenteísmo, turnover, pontualidade | Indicador (`moldes.md`), um documento em `indicadores/`, sem meta | `referencia` |
 | Termo | falta justificada, desistente, new hire | Glossário da área (`moldes.md`) | `glossario` |
-| Sistema da área | app do App Builder do time em que ele registra ou opera, planilha em que o time registra e consulta, sistema externo que a área contrata (sistema de tech, ferramenta geral e painel não; ver a ordem em `moldes.md`) | Sistema da área (`moldes.md`), na lista `sistemas/` | `referencia` |
-| Ritual | daily, semanal, comitê | Uma linha na visão geral da área (`moldes.md`); documento na frente só se tem regra própria | `referencia` |
+| Sistema da área | o que a área administra e de que um processo dela depende: app da plataforma do time em que ele registra ou opera, planilha que é fonte de verdade de um processo, SaaS, ERP ou sistema externo que a área contrata (sistema de outra área, inclusive de tech, ferramenta geral, planilha de análise e painel não; ver a ordem em `moldes.md`) | Sistema da área (`moldes.md`), a ficha em `<area>/sistemas/` | `referencia` |
+| Ritual | daily, semanal, comitê | Uma linha na visão geral da área (`moldes.md`); documento em `geral/` (na frente dele) só se tem regra própria | `referencia` |
 | Meta, projeto, plano do ano | meta de turnover de 2027, projeto de nova trilha, plano de ação do ano | Não sobe na carga: vai para o plano como "espera a estratégia" (`forma-comum.md`, seção 4) | — |
 
 Material que não cabe em nenhum tipo: pergunte ao owner para que ele serve e quem consulta. Se ninguém consulta, não
@@ -88,7 +90,7 @@ Quem decide estas regras: <papel>.
 
 ## De onde vem o dado
 <o sistema ou relatório de origem, como link para `tech/sistemas`, para a ontologia ou para o documento do sistema da
-área na lista `sistemas/`; aqui não se descreve o sistema>.
+área em `sistemas/`; aqui não se descreve o sistema>.
 
 ## O que entra e o que não entra
 - **<Regra>.** <o que é>. Vale desde: <data>.
@@ -153,8 +155,8 @@ pela área.
    4. Que números a área acompanha, onde está cada um e quem responde por ele?
    5. Que reuniões fixas o time tem, e o que se decide em cada uma?
    6. Que termos quem chega no time demora a entender?
-   7. Que ferramentas, planilhas e sistemas o time usa que não são de tech (um app feito pelo time, uma planilha em
-      que o time registra e consulta, um sistema que a área contrata)? E onde mora o que hoje está só na cabeça de alguém?
+   7. De que sistemas os processos do time dependem (um app feito pelo time, uma planilha que é a fonte de verdade de
+      um processo, um SaaS ou o ERP), e quem administra cada um? E onde mora o que hoje está só na cabeça de alguém?
    8. Com quem de fora o time se relaciona (parceiro, plataforma, fornecedor, cliente) e o que fica combinado, sem
       valores?
    9. Que decisões do time dependem de outra área?
@@ -167,7 +169,7 @@ pela área.
    ler o documento.
 5. Atas no LivupOS (`contexto_liv_up_buscar` com `filtros.areas`) costumam ter decisão datada: use-as para "vale
    desde".
-6. Leva pequena: a visão geral de cada frente que tiver documento e de dois a quatro documentos. É melhor publicar pouco e certo do que preencher lacuna com
+6. Leva pequena: de dois a quatro documentos em `geral/` (com a visão geral da frente, se ela ajudar a achar). É melhor publicar pouco e certo do que preencher lacuna com
    suposição.
 
 ## Área sensível (as que lidam com pessoas, dinheiro ou jurídico: People, Financeiro, Jurídico; em qualquer diretoria, o pedaço que lida com isso)

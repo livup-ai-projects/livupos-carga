@@ -7,7 +7,7 @@ que cada pergunta é feita, o que vai ficar publicado e o que fazer se travar.
 ## Tom
 
 - Frase curta, segunda pessoa, sem jargão. Nada de "subárea", "owner", "camada forte", "revisao_id", "proposta",
-  "D138", "frontmatter", "estrutura 3" na conversa: diga "área de dentro", "quem responde", "documento oficial",
+  "D138", "frontmatter", "estrutura 4", "raiz fixa" na conversa: diga "área de dentro", "quem responde", "documento oficial",
   "publicar". Caminho de documento só no plano e no arquivo do pedido.
 - **Uma pergunta por mensagem, e o porquê antes dela.** "Por que pergunto: ..." numa frase. A exceção é a confirmação
   (o que o LivupOS já diz, para corrigir se estiver errado), que vem junto, sem ser pergunta.
@@ -27,12 +27,12 @@ fazer. Exemplo, ao abrir a etapa 3:
 ◇  4 áreas de dentro criadas, pedido ao admin entregue
 ◆  3 de 6 · O mínimo de Logística
 ○  Passar às áreas de dentro
-○  Sistemas e indicadores (opcional)
+○  Sistemas e indicadores
 ○  Fechar
 ```
 
 Nomes curtos: "A área", "As áreas de dentro", "O mínimo de `<Área>`", "Passar às áreas de dentro", "Sistemas e
-indicadores (opcional)", "Fechar".
+indicadores", "Fechar".
 
 ## Etapa 1 de 6: a área
 
@@ -46,7 +46,8 @@ mensagem só (trilha com `◇ 1 de 6 · A área` feita e `◆ 2 de 6 · As área
 > **2 de 6 · As áreas de dentro.** `<a primeira pergunta da etapa 2 que faltar, abaixo: a diferença com a plataforma,
 > ou já a tabela de quem responde>`
 
-Se a área já tem documentos numa forma anterior, acrescente antes da pergunta:
+Se a área já tem documentos numa forma anterior (não a área na 3 que já cabe na forma nova: essa não tem nada a
+mudar de lugar), acrescente antes da pergunta:
 
 > A área já tem documentos numa forma anterior. Não vou mover nem renomear nada; o que entrar agora segue a forma nova,
 > e a mudança do que já existe fica para depois, com um plano que você aprova.
@@ -102,7 +103,7 @@ sublinhado viram espaço, e cada palavra começa com maiúscula, menos de, da, d
 > pedido ao admin normalmente, e eu escrevo o mínimo num arquivo, mas não publico hoje. Peça ao time do LivupOS a carga
 > atualizada e, quando tiver, chame a carga de novo e anexe o arquivo.
 
-**A forma nova ainda não entrou** (`versao_atual: 2`; `forma-comum.md`, seção 0, item 6), uma vez, antes de mostrar o
+**A forma nova ainda não entrou** (`versao_atual` menor que 4; `forma-comum.md`, seção 0, item 6), uma vez, antes de mostrar o
 rascunho do mínimo, no lugar do efeito de publicar:
 
 > O LivupOS ainda está terminando de receber a forma nova das áreas, e o mínimo de `<Área>` já sai nela. Por isso eu
@@ -325,6 +326,8 @@ Depois do último bloco, o efeito e a pergunta:
 >   `<Área aberta: "A empresa toda lê." | não sei ou fechada: "Quando o admin abrir <Área> para a empresa (está no
 >   pedido), a empresa toda lê.">`
 > - para corrigir depois, publica-se uma versão nova; a anterior fica no histórico.
+> `<Só na área na estrutura 3 que já cabe na forma nova (forma-comum.md, seção 6):>` - a visão geral passa a dizer
+>   que `<Área>` está na forma nova das áreas; nenhum documento muda de lugar.
 >
 > Posso publicar?
 
@@ -392,18 +395,27 @@ A mesma pessoa em mais de uma área de dentro: uma mensagem só, com as áreas j
 numa linha: "`<Área de dentro>` fica com você até alguém assumir; quando souber quem, me diga, que eu confiro com você,
 troco quem responde (com o seu ok) e preparo a mensagem."
 
-## Etapa 5 de 6: sistemas e indicadores (opcional)
+## Etapa 5 de 6: sistemas e indicadores
 
-Uma pergunta por mensagem; a segunda só depois da resposta (ou do "pular") da primeira.
+Uma pergunta por mensagem; a segunda só depois da resposta (ou do "depois" ou "pular") da primeira.
 
-> **5 de 6 · Sistemas e indicadores (opcional).** O mínimo está publicado; daqui em diante, tudo é opcional e você
-> pode pular.
+> **5 de 6 · Sistemas e indicadores.** O mínimo está publicado. Agora os sistemas de `<Área>`, e depois, se você
+> quiser, os indicadores.
 >
-> **Sistemas.** Em que sistemas o trabalho de `<Área>` acontece hoje, e como, na prática? Pode ser um app feito na plataforma
-> de apps da Liv Up, um sistema que a área contrata, uma planilha em que o time registra e consulta; conte em poucas palavras
-> quem usa e para quê. Por que pergunto: quem chega precisa saber onde cada processo acontece de fato. O sistema que é da área
-> ganha uma página curta (para que serve, quem usa, quem cuida, o que não fazer); o que é de tech ganha só o link para
-> a página que tech mantém. Se preferir, "pular".
+> **Sistemas.** De que sistemas os processos de `<Área>` dependem hoje? Pode ser um app da plataforma de apps da Liv
+> Up, um sistema ou serviço que a área contrata (um SaaS, o ERP), ou uma planilha que é a fonte de verdade de um
+> processo, aquela em que o time registra e de que o processo depende. `<Se já sabe algum:>` Já achei `<app A>` e
+> `<app B>` na plataforma de apps`<, e o material cita <C>>`: falta algum? Para cada um, conte em poucas palavras quem
+> usa, para quê e quem cuida dele (quem administra o contrato, a configuração ou o acesso). Por que pergunto: quem
+> chega precisa saber onde cada processo acontece de fato. O sistema que `<Área>` administra ganha uma ficha curta
+> (para que serve, quem usa, quem cuida, o que não fazer); o que outra área administra, como os de tech, ganha só o
+> link para a ficha dela. Planilha de trabalho ou de análise não entra aqui. Se for melhor noutra conversa,
+> "depois".
+
+**Sistema compartilhado ou de dono incerto** (mais de uma área usa, ou o diretor não sabe quem administra), uma pergunta:
+
+> Quem administra `<sistema>`: o contrato, a configuração, quem dá o acesso? Por que pergunto: a ficha dele fica numa
+> área só, a que administra, e as outras leem dali; o jeito de `<Área>` usar fica num documento de `<Área>`.
 
 > **Indicadores.** Que números `<Área>` acompanha, e de onde vem cada um: do catálogo do time de Dados, de uma
 > consulta, de um app, de uma planilha, ou "eu informo"? A definição de cada um eu escrevo e você confere na revisão. Por que
@@ -554,16 +566,19 @@ conversa, sem nome nem número de pessoas (`references/estrategia.md`, seção 3
 
 Checklist (a skill confere sozinha e mostra só o que falhou):
 
-- [ ] A visão geral da área tem `estrutura: 3` (fora da área na forma anterior), as áreas de dentro com quem responde por cada uma, e as perguntas que
+- [ ] A visão geral da área tem `estrutura: 4` (fora da área na forma anterior), as áreas de dentro com quem responde por cada uma, e as perguntas que
       o contexto responde, cada uma apontando um documento publicado, uma área de dentro ou "Em aberto".
 - [ ] O glossário geral está em `<area>/glossario` (ou a área já tinha glossário noutro formato e ele foi alterado no
       lugar).
-- [ ] Nada solto: na raiz da área, só a visão geral e pastas; nenhum glossário nem indicador dentro de frente; nenhuma
-      pasta vazia; nenhum link aponta para documento não publicado.
+- [ ] Na raiz da área, só a raiz fixa (visão geral, glossário, `geral/`, `sistemas/`, `indicadores/`, as reservadas):
+      nada que a carga criou está solto na raiz; frente só dentro de `geral/`; nenhum nome reservado dentro de
+      `geral/`; nenhuma pasta da plataforma criada pela carga; nenhuma pasta vazia; nenhum link aponta para documento
+      não publicado.
 - [ ] Nenhum dado de pessoa, nem como exemplo; nenhum nome fora de quem responde, quem substitui, a referência e
       "quem decide".
-- [ ] Se houve sistemas: nenhum sistema de tech descrito (só link); cada sistema da área que entrou tem documento na
-      lista `sistemas/`, sem dado, credencial nem estrutura de tabela. Pular não é falha.
+- [ ] Sistemas: a pergunta foi feita; nenhum sistema de outra área (inclusive tech) descrito (só link); cada sistema
+      que a área administra e entrou tem a ficha em `<area>/sistemas/`, sem dado, credencial nem estrutura de tabela.
+      "Depois" não é falha: fica no plano.
 - [ ] Se houve indicadores: cada indicador tem a definição e de onde vem o número; nenhum traz meta nem fórmula.
 - [ ] As áreas de dentro conferidas e com ok foram criadas (ou estão no pedido ao admin, com o motivo); o pedido ao
       admin, se houver, está entregue; as mensagens às áreas de dentro, se o mínimo saiu, também.

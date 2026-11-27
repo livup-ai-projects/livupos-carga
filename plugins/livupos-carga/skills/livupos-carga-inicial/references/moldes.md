@@ -2,13 +2,13 @@
 
 Antes de escrever, leia um ou dois documentos vizinhos já publicados (`contexto_liv_up_listar` na pasta e
 `contexto_liv_up_ler`) e copie o `tipo` e o jeito de citar fonte. Exceção: nos documentos básicos que a carga cria,
-o tipo vem da forma (`forma-comum.md`, seção 0). Se a área está vazia, use os de `compras-ic/compras/`
-como referência de estilo.
+o tipo vem da forma (`forma-comum.md`, seção 0). Se a área está vazia, use os documentos publicados de
+`compras-ic` como referência de estilo (o jeito de escrever e citar a fonte, não as pastas).
 
 ## Frontmatter
 
 `titulo` e `resumo` vão sempre entre aspas duplas (um ": " no meio quebra o YAML sem elas). Só estes campos: `tipo`,
-`titulo` (3 a 200 caracteres), `resumo` (20 a 300), `tags` (opcional), `estrutura: 3` (só
+`titulo` (3 a 200 caracteres), `resumo` (20 a 300), `tags` (opcional), `estrutura: 4` (só
 na visão geral da raiz da área ou da área de dentro, `forma-comum.md`) e, só quando o diretor pediu a marca,
 `fora_da_empresa: true` (`fora-da-empresa.md`; não é rotina). No indicador, também `definicao`, `fonte`,
 `catalogo` e `tipo_indicador` (abaixo). Nunca `camada`, `autoridade`, `status`, `owner`,
@@ -18,10 +18,11 @@ levam os campos de `references/estrategia.md`, seção 2.
 Tipos usados na carga: `processo` (processo e regra), `glossario`, `referencia` (visões gerais, indicadores, política,
 valores). Se a área já tem documentos de processo com outro tipo, siga a área; numa área nova ou vazia, use estes.
 
-Caminho: minúsculas, sem acento, com hífen. Glossário: `<area>/glossario` (o geral) e `<area>/glossario/<tema>` (um tema); indicador:
-`<area>/indicadores/<indicador>`; documento que vale para a área inteira: `<area>/geral/<documento>`; de frente:
-`<area>/<frente>/geral/<documento>` ou `<area>/<frente>/<lista>/<item>`. Nada solto ao lado de pastas
-(`forma-comum.md`).
+Caminho: minúsculas, sem acento, com hífen. Glossário: `<area>/glossario` (o geral) e `<area>/glossario/<tema>` (um
+tema); indicador: `<area>/indicadores/<indicador>`; sistema: `<area>/sistemas/<sistema>`; documento que vale para a
+área inteira: `<area>/geral/<documento>`; de frente: `<area>/geral/<frente>/<documento>` (ou numa subpasta que o time
+escolher, `<area>/geral/<frente>/<pasta>/<documento>`). Na raiz da área, só a raiz fixa; dentro de `geral/`, livre,
+menos os nomes reservados (`forma-comum.md`, seções 1 e 3).
 
 ## Regras de texto que valem para todos
 
@@ -29,11 +30,13 @@ Caminho: minúsculas, sem acento, com hífen. Glossário: `<area>/glossario` (o 
   respostas de quem responde pela área, com data, atas). Cada afirmação que não é óbvia tem a fonte no fim da frase ou da seção.
 - Sistema de tech, tabela e entidade: link para o documento de `tech/sistemas` ou da ontologia, com o nome que as pessoas usam
   (`[Abbiamo](../../tech/sistemas/abbiamo.md)`, link relativo com `.md`, como os documentos publicados fazem; conte os
-  `../` pela profundidade real do documento: `logistica/visao-geral` usa um, `logistica/glossario/rotas` e `logistica/expedicao/visao-geral`
-  usam dois, `logistica/expedicao/geral/x` usa três). Nunca descreva o sistema de tech. Sistema da área (app do time, planilha que
-  funciona como sistema, sistema externo que o time opera): link para o documento dele na lista `sistemas/`
-  ("Sistema da área", abaixo). Entre documentos da própria área, o mesmo formato
-  (`[Absenteísmo](../indicadores/absenteismo.md)` a partir de uma frente).
+  `../` pela profundidade real do documento, um por pasta acima dele: `logistica/visao-geral` usa um;
+  `logistica/glossario/rotas`, `logistica/sistemas/x` e `logistica/geral/x` usam dois; `logistica/geral/expedicao/x`
+  usa três; `logistica/geral/expedicao/carregamento/x` usa quatro). Nunca descreva o sistema de outra área. Sistema
+  da área (app do time, planilha que é fonte de verdade de um processo, sistema externo que a área administra): link
+  para a ficha dele em `<area>/sistemas/` ("Sistema da área", abaixo). Entre documentos da própria área, o mesmo
+  formato: de `geral/<frente>/x`, `[Absenteísmo](../../indicadores/absenteismo.md)` e
+  `[App de vagas](../../sistemas/app-de-vagas.md)`.
 - Papel no lugar de nome, também em "confirmado por" e na linha de fonte ("respostas da coordenação de 16/11"). Se o
   papel de quem roda não tem fonte, use o papel na área: "confirmado por quem responde por People", "pela substituição de Tech". Nome
   só em "quem decide" e em quem responde pelas áreas de dentro, confirmado pelo diretor.
@@ -79,7 +82,7 @@ vai para a lista).
 ## Indicador
 
 Opcional, depois do mínimo (`SKILL.md`, etapa 5). Um documento por indicador, em `<area>/indicadores/<indicador>`
-(nunca dentro de frente), `tipo: referencia`. **Aponta, não copia:** a conta e a definição técnica moram no catálogo do
+(nunca dentro de `geral/`), `tipo: referencia`. **Aponta, não copia:** a conta e a definição técnica moram no catálogo do
 time de Dados (o glossário de negócio do BigQuery, que o Claude lê por `get_business_metrics`) ou numa tabela; o
 documento guarda a definição nas palavras da área e de onde vem o número. **Não traz meta** (a meta mora na estratégia
 do ano; a achada no material vai para o plano como "espera a estratégia") e **não traz a fórmula**.
@@ -152,15 +155,15 @@ Formato que o extrator lê, um item por termo:
 
 ## Visão geral da área
 
-`<area>/visao-geral`, `tipo: referencia`, com `estrutura: 3` no frontmatter (fora da forma anterior,
-`forma-comum.md`, seção 6). É a porta da área: quem chega lê só ela e sabe onde procurar e a quem perguntar.
+`<area>/visao-geral`, `tipo: referencia`, com `estrutura: 4` no frontmatter (fora da forma anterior,
+`forma-comum.md`, seção 6). É a porta e o mapa da área: quem chega lê só ela e sabe onde procurar e a quem perguntar.
 
 ```markdown
 ---
 tipo: referencia
 titulo: "<Área>: visão geral"
 resumo: "<o que a área faz, numa frase>"
-estrutura: 3
+estrutura: 4
 ---
 ```
 
@@ -176,14 +179,17 @@ nunca viram pergunta só para preencher:
    existe com visão geral; senão, sem link. Área de dentro sem quem responde: "por enquanto, com quem responde por
    `<Área>`". Diga uma vez que cada área de dentro mantém o próprio contexto e que quem responde pela área responde
    pelo todo.
-3. **Frentes:** só se houver (pedaço sem responsável próprio): uma linha por frente, o propósito e a referência
-   (papel), com link para a visão geral dela só se ela já está publicada ou sai na mesma leva. No mínimo, sem link.
+3. **Frentes e o que fica em `geral/`:** só se houver: uma linha por frente (pedaço sem responsável próprio, que mora
+   em `geral/<frente>/`), com o propósito e a referência (papel), e uma linha por pasta de `geral/` que o time criou
+   (o que ela guarda). Link só para documento já publicado ou que sai na mesma leva; no mínimo, sem link. É o mapa
+   de `geral/`: não liste os documentos, o LivupOS lista.
 4. **Quem é quem:** os papéis que decidem e respondem na área, além dos de cima.
 5. **Rituais:** uma linha por ritual: objetivo, quem participa (papéis), cadência, o que se decide nele.
 6. **Com quem a área se relaciona:** outras áreas, parceiros e fornecedores (a empresa, nunca a pessoa de contato), e
    o que fica combinado, sem valores.
-7. **Sistemas e apps:** sistemas de tech como link para `tech/sistemas`; sistemas da área com link para o documento
-   na lista `sistemas/`, ou o nome sem link, "na próxima leva". **Fonte que guarda dado de pessoas** (a planilha de
+7. **Sistemas e apps:** os sistemas da área com link para a ficha em `<area>/sistemas/`, ou o nome sem link, "na
+   próxima leva"; os sistemas que outra área administra (inclusive tech) com link para a ficha da área dona, ou o nome
+   e a área em texto; os de uma área de dentro, pela área de dentro ("o app de folha, do Departamento Pessoal"). **Fonte que guarda dado de pessoas** (a planilha de
    headcount, com salários; um controle de afastamentos; a lista de motoristas com documentos): aparece como fonte que existe, numa linha, com o assunto, quem
    cuida (o papel, ou o nome se é quem responde por uma área de dentro) e "para acesso, peça a `<quem cuida>`", sem
    link e sem nenhum número ou campo dela. Não ganha documento próprio.
@@ -198,8 +204,9 @@ Se passar de 3 mil tokens, encurte os rituais e os apps antes de cortar pergunta
 
 ## Visão geral da frente
 
-`<area>/<frente>/visao-geral`, `tipo: referencia`. Curta: é o índice da pasta. **A lista dos documentos é gerada pelo
-LivupOS na leitura; não escreva a lista.**
+`<area>/geral/<frente>/visao-geral`, `tipo: referencia`. Opcional: entra quando a frente ganha o primeiro documento e
+alguém precisa saber para que ela existe e a quem perguntar. Curta: é o índice da pasta. **A lista dos documentos é
+gerada pelo LivupOS na leitura; não escreva a lista.**
 
 ```markdown
 ---
@@ -216,7 +223,8 @@ resumo: "<o propósito da frente, numa frase>"
 
 Referência: <papel> (a quem perguntar). Quem aprova o que entra aqui é quem responde por <Área>.
 
-Indicadores que esta frente acompanha: <links para `../indicadores/<indicador>.md`, se houver>.
+Indicadores que esta frente acompanha: <links para `../../indicadores/<indicador>.md`, se houver>.
+Sistemas que ela usa: <links para `../../sistemas/<sistema>.md` ou para a ficha da área dona, se houver>.
 
 ## Em aberto
 - <o que falta>. Responde: <papel>.
@@ -224,34 +232,46 @@ Indicadores que esta frente acompanha: <links para `../indicadores/<indicador>.m
 
 ## Sistema da área
 
-`<area>/sistemas/<sistema>` (mais de uma frente usa) ou `<area>/<frente>/sistemas/<sistema>` (só uma frente usa),
-`tipo: referencia`, `tags: [sistema]`. Opcional, depois do mínimo (`SKILL.md`, etapa 5). Este molde vence o "copie os vizinhos":
-se a área já tem fichas de sistema mais longas (telas, o que o app grava, código), siga este molde no documento novo e
-não mexa nas antigas.
+`<area>/sistemas/<sistema>`, sempre na raiz da área (nunca dentro de `geral/` nem de uma frente), `tipo: referencia`,
+`tags: [sistema]`. Depois do mínimo (`SKILL.md`, etapa 5). Este molde vence o "copie os vizinhos": se a área já tem
+fichas de sistema mais longas (telas, o que o app grava, código), siga este molde no documento novo e não mexa nas
+antigas.
 
-**Quem ganha este documento.** Decida nesta ordem, e pare no primeiro que vale:
-1. **Sistema de tech:** tem documento em `tech/sistemas/*` (inteiro ou só da integração), ou tech contratou ou
-   mantém. Só link. Se o documento de tech é só da integração, o sistema vai para "o que falta fora da área"
-   (`area-e-ontologia.md`). Exemplo: a Abbiamo, que o Last Mile opera todo dia, é de tech.
-2. **Ferramenta de uso geral da empresa** (Slack, Google Workspace, Notion, Claude): não é sistema da área; no máximo
+**O que é sistema** (`forma-comum.md`, seção 3): aquilo de que um processo da área depende e que tem dono. App da
+plataforma de apps internos, SaaS ou sistema externo, ERP, ou planilha que é fonte de verdade de um processo.
+
+**Quem ganha a ficha.** Decida nesta ordem, e pare no primeiro que vale:
+1. **Ferramenta de uso geral da empresa** (Slack, Google Workspace, Notion, Claude): não é sistema da área; no máximo
    uma linha na visão geral.
-3. **Sistema de outra área** (o app de Compras que o time consulta): link para o documento da área dona, ou o nome e a
-   área em texto. Não ganha documento aqui nem vai para "o que falta fora da área".
-4. **Sistema da área:** o time é a referência no dia a dia e decide como ele é usado:
-   - **app do App Builder** com `owner_area` da área (ou da subárea), em que o time registra, decide ou opera. Quem
-     escreveu o código não importa, e rodar na plataforma de apps (de tech) não torna o app "de tech". Painel e
-     relatório, que só mostram número, não ganham documento: uma linha na visão geral;
-   - **planilha que funciona como sistema:** o time registra e consulta nela (cadastro, controle, fila); planilha só
-     de análise não ganha documento;
-   - **sistema externo que a área contrata e administra** (o time escolhe o fornecedor e dá o acesso).
-5. **Na dúvida,** pergunte ao diretor, com as duas opções.
+2. **Planilha de trabalho ou de análise** (o time faz conta nela, monta um relatório, mas nenhum processo depende dela
+   como registro): não é sistema. Se tem regra que vale, a regra vira documento em `geral/`; senão, não sobe.
+   Planilha que guarda dado de pessoas não ganha documento: vai como fonte na visão geral (seção 7 da visão geral da
+   área).
+3. **Quem administra** (o contrato, a configuração, quem dá o acesso; no app da plataforma, o `owner_area`):
+   - **outra área, inclusive tech** (tem ficha em `tech/sistemas/*` ou na área dona, ou a área dona contratou e
+     mantém): só link para a ficha do dono, ou o nome e a área em texto. Não ganha ficha aqui. Se a área dona é tech e
+     não tem ficha (ou só a da integração), o sistema vai para "o que falta fora da área" (`area-e-ontologia.md`). Se o
+     time tem regra própria de uso (o que registrar, quando, quem pode), ela vira documento de uso em `geral/`, com o
+     link para a ficha. Exemplo: a Abbiamo, que o Last Mile opera todo dia, é de tech; o jeito de o Last Mile usá-la
+     fica no `geral/` do Last Mile;
+   - **uma área de dentro desta área** (o sistema que só ela administra): a ficha mora na área de dentro e entra pela
+     carga dela; aqui, uma linha na visão geral;
+   - **esta área:** ganha a ficha. Vale para o **app da plataforma** com `owner_area` da área (quem escreveu o código
+     não importa, e rodar na plataforma de apps, de tech, não torna o app "de tech"; painel e relatório, que só mostram
+     número, não ganham ficha: uma linha na visão geral), a **planilha que é fonte de verdade** (o time registra e
+     consulta nela: cadastro, controle, fila) e o **SaaS, ERP ou sistema externo** que a área contrata e administra.
+4. **Sistema compartilhado** (o ERP que três áreas usam): a ficha mora na área que administra; as outras leem dali e
+   escrevem o uso delas no `geral/` delas. Se nenhuma área administra de fato, pergunte ao diretor qual é; sem
+   resposta, o nome na visão geral e a pergunta no plano.
+5. **Na dúvida,** pergunte ao diretor, com as opções.
 
-**Onde mora.** Na lista `sistemas/` da raiz da área, se mais de uma frente o usa, ou se a frente que o usa ainda não
-tem visão geral publicada; na da frente, se só ela usa e ela já existe. Sistema
-que é de uma área de dentro (o sistema que só ela opera) mora na área de dentro e entra pela carga dela. App do
-App Builder mora na área do `owner_area` dele (a plataforma liga o documento ao app por ali), mesmo que uma área de
-dentro o opere: diga isso em "Quem usa". Se a
-área já tem uma pasta `sistemas/` (numa área na forma anterior), ela vence (`forma-comum.md`, seção 3).
+**Onde mora.** Sempre em `<area>/sistemas/<sistema>` da área que administra, mesmo que só uma frente use: a frente
+aponta para a ficha. App da plataforma mora na área do `owner_area` dele (a plataforma liga o documento ao app por
+ali), mesmo que uma área de dentro o opere: diga isso em "Quem usa". **O nome da ficha de app é o id do app na
+plataforma** (`<area>/sistemas/<id-do-app>`): a plataforma grava os pedidos do app em `sistemas/<id-do-app>/pedidos`,
+ao lado, e a skill nunca cria nem mexe nessa pasta. Área na forma anterior com fichas dentro de uma
+frente (`<area>/<frente>/sistemas/`): a ficha nova vai para `<area>/sistemas/`, e as antigas ficam onde estão
+(`forma-comum.md`, seção 6).
 
 Curto (meia página a uma página):
 
@@ -279,7 +299,8 @@ cite-o como app `<id-na-plataforma>`, que é como o LivupOS liga o documento ao 
 
 ## Onde fica
 <o endereço do app ou do sistema (app da plataforma: `https://<app>.livup-ai.app`). App da plataforma: também, em texto, o caminho da estrutura que a plataforma gera
-(`<area do owner_area>/estrutura-dos-apps/<app>.yaml`) e o dos dados publicados, se houver. Planilha: ver abaixo>
+(`<area>/estrutura-dos-apps/<app>.yaml`) e o dos dados publicados, **só o caminho achado no `listar` ou no `buscar`**
+(a área desse caminho nem sempre é a do `owner_area`); sem achar, não cite. Planilha: ver abaixo>
 
 ## Ligado a
 <uma linha: de que sistema ou planilha ele recebe e para qual manda, com link (sistema de tech) ou nome; sem descrever

@@ -27,9 +27,10 @@ O molde é a versão 1, para usar até a revisão de fevereiro de 2027. Nada aqu
 - O projeto mora na área da diretoria dona, ou na subárea dela (abaixo). Projeto de duas diretorias tem uma dona; a
   outra aparece em "Depende de" ou em "Quem espera algo deste projeto".
 - **Projeto de um time:** se o time é uma subárea que existe no LivupOS, o projeto mora em
-  `<subárea>/projetos/<projeto>/` (o id da subárea abre o caminho: `producao/projetos/...`, e não
-  `operacoes/producao/projetos/...`, que seria uma frente). Se a subárea não existe, mora em `<diretoria>/projetos/`,
-  com o dono do time em `dono`. Nunca numa pasta `projetos/` dentro de uma frente: ela não abre para a empresa. Em
+  `<subárea>/projetos/<projeto>/` (o id da subárea abre o caminho: `operacoes-producao/projetos/...`, e não
+  `operacoes/geral/producao/projetos/...`, que é uma frente: `projetos` é nome reservado dentro de `geral/` e ali não
+  abre para a empresa). Se a subárea não existe, mora em `<diretoria>/projetos/`,
+  com o dono do time em `dono`. Nunca numa pasta `projetos/` dentro de `geral/` ou de uma frente: ela não abre para a empresa (e `projetos` é nome reservado dentro de `geral/`). Em
   subárea sigilosa que já existe, o projeto mora na diretoria-pai, porque a subárea não abre.
 - **A subárea não é diretoria:** não tem `estrategia/2027` nem arquivo próprio. Os projetos dela entram com os da
   diretoria-pai: no arquivo da diretoria, na lista do que falta dela e na conferência do diretor, que publica e decide
@@ -556,7 +557,7 @@ de códigos, nas cópias e nos arquivos das diretorias é seu):
   (`proprio-da-area`), ou não diz (`"a confirmar"` e a pergunta com as duas saídas, seção 2). Não deduza
   `proprio-da-area` do silêncio do material nem de o projeto ser de um time.
 - **Onde mora o projeto de um time:** na subárea, se ela existe (está em `areas.txt` ou no `listar` da raiz); se não, na
-  diretoria (seção 1). Nunca em `projetos/` dentro de uma frente.
+  diretoria (seção 1). Nunca em `projetos/` dentro de `geral/` ou de uma frente.
 - **A decisão mais nova vale.** Uma ata ou decisão datada depois dos slides vale sobre eles: projeto cortado não sobe,
   e meta revisada entra com o valor novo. Diga a fonte da mudança no "Em aberto" do documento.
 - **Número da empresa que é a soma ou a média dos das diretorias** não é divergência: confira a conta antes de
@@ -981,7 +982,7 @@ mesma lista à mão, item por item:
 7. Projeto sem dono, com mais de um dono, ou com dono sem e-mail. Projeto sem objetivo, ou sem `meta` e sem
    contribuição. `meta` que não existe. `objetivos` que não é lista. `chave` que não é true nem false. `pai` que não
    existe, que tem pai ou que é o próprio projeto. Projeto
-   numa pasta `projetos/` dentro de uma frente (não abre para a empresa). `efeito` da
+   numa pasta `projetos/` dentro de `geral/` ou de uma frente (não abre para a empresa). `efeito` da
    contribuição escrito sem aspas.
 8. `depende_de` que aponta projeto que não existe. Marco fora do formato, de outro projeto, ou que não está na lista.
 9. Dependência que só um lado declarou: o projeto do qual se depende não tem quem depende dele em "Quem espera algo
